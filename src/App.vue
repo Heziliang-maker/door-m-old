@@ -25,10 +25,10 @@ export default {
         };
     },
     methods: {
-        ready() {
-            this.isReady = true;
+        ready(isReady) {
+            this.isReady = isReady;
         }
-    },
+    }
 };
 </script>
 

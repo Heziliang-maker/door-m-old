@@ -11,9 +11,8 @@
       </div>
       <div class="text">
         <header>Company profile</header>
-        <main>Located in the core regional center of Lujiazui, Shanghai, FormulaRay Information Technology (Shanghai)
-          Co., Ltd. is committed to helping manufacturing enterprises seize the current cross-border e-commerce
-          opportunities by leveraging a variety of channels and business resources around the world.</main>
+        <main>Formularay Information Technology (Shanghai) Co., Ltd. is located in Shanghai and serves the world.
+          Committed to building a global manufacturing to consumer e-commerce services ecosystem.</main>
       </div>
     </div>
   </div>

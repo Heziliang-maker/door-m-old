@@ -52,6 +52,9 @@ export default {
             TabList: ["Outdoor&Camping Tent", "Sportswear", "Adult", "Fashion Clothes", "Household Supplies "]
         };
     },
+    beforeCreate() {
+        this.$emit("ready", false);
+    },
     created() {
         this.initData();
     },
@@ -74,7 +77,7 @@ export default {
                 this.cateMap = data.stringListMap;
 
                 this.$nextTick(() => {
-                    this.$emit("ready");
+                    this.$emit("ready", true);
                 });
             });
         },

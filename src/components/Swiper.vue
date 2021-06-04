@@ -4,8 +4,8 @@
 -->
 <template>
   <div>
-    <van-swipe class="my-swipe" height="124.85" :autoplay="1000" indicator-color="#000000">
-      <van-swipe-item v-for="(item,index) in list" :key="index" v-jumpTo=item.advUrl>
+    <van-swipe class="my-swipe" :autoplay="1000" indicator-color="#000000">
+      <van-swipe-item class="swipe-item" v-for="(item,index) in list" :key="index" v-jumpTo=item.advUrl>
         <img :src="item.img" alt="">
       </van-swipe-item>
     </van-swipe>
@@ -29,6 +29,7 @@ export default {
     font-size: 20px;
     line-height: 150px;
     text-align: center;
+    height: 124.85px;
     // background-color: #39a9ed;
 }
 img {

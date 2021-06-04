@@ -51,7 +51,7 @@ export default {
             bannerList: [],
             hotsaleList: [[], []], //avoid error
             cateMap: [],
-            curTabName: "Outdoor&Camping Tent",
+            curTabName: "",
             TabList: []
         };
     },
@@ -78,6 +78,7 @@ export default {
                 let list2 = data.portalsHotProduct.slice(3);
                 this.hotsaleList = [list1, list2]; //not responsive
                 this.TabList = Object.keys(data.stringListMap);
+                this.curTabName = this.TabList[0]; //默认为第一项
                 this.cateMap = data.stringListMap;
 
                 this.$nextTick(() => {

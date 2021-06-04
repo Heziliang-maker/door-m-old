@@ -3,24 +3,24 @@
  * @Description: 
 -->
 <template>
-  <div class="slide">
+    <div class="slide">
 
-    <div class="probox">
-      <!-- item -->
-      <div class="proitem clicks" v-for="(item,index) in list" :key="index" v-jumpTo=item.productUrl>
-        <div class="proitem-top">
-          <img :src="item.productImg[0]" alt="">
+        <div class="probox">
+            <!-- item -->
+            <div class="proitem clicks" v-for="(item,index) in list" :key="index" v-jumpTo=item.productUrl>
+                <div class="proitem-top">
+                    <img :src="item.productImg[0]" alt="">
+                </div>
+                <div class="proitem-bot">
+                    <div :style="{backgroundImage:'url('+item.productImg[1]+')'}" class="coverimg"></div>
+                    <div :style="{backgroundImage:'url('+item.productImg[2]+')'}" class="coverimg"></div>
+                    <div :style="{backgroundImage:'url('+item.productImg[3]+')'}" class="coverimg"></div>
+                </div>
+                <div class="proitem-foot" v-html="item.productName">
+                </div>
+            </div>
         </div>
-        <div class="proitem-bot">
-          <div :style="{backgroundImage:'url('+item.productImg[1]+')'}" class="coverimg"></div>
-          <div :style="{backgroundImage:'url('+item.productImg[2]+')'}" class="coverimg"></div>
-          <div :style="{backgroundImage:'url('+item.productImg[3]+')'}" class="coverimg"></div>
-        </div>
-        <div class="proitem-foot" v-html="item.productName">
-        </div>
-      </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -52,8 +52,9 @@ export default {
         align-items: flex-start;
         flex-wrap: nowrap;
         box-sizing: border-box;
-        overflow: auto;
-
+        // overflow: auto;
+        overflow-x: scroll;
+        overflow-y: hidden;
         // &-wapper {
         //     width: 100%;
         // }

@@ -1,55 +1,57 @@
 <!DOCTYPE html>
 <html lang="">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!-- <meta name="viewport" content="width=device-width,initial-scale=1.0," /> -->
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no,viewport-fit:cover"
-    />
-    <!-- <link
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- <meta name="viewport" content="width=device-width,initial-scale=1.0," /> -->
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no,viewport-fit:cover" />
+  <!-- <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     /> -->
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
-    <title>Buykop</title>
-    <style>
-      html {
-        width: 100%;
-        box-sizing: border-box;
-        /* touch-action: pan-x; */
-      }
-      body {
-        width: 100%;
-      }
-      .coverimg {
-        background-size: cover;
-        background-position: 50%;
-      }
-      div,
-      img {
-        user-select: none;
-        -webkit-tap-highlight-color: rgba(255, 0, 0, 0);
-      }
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+  <title>Buykop</title>
+  <style>
+    html {
+      width: 100%;
+      box-sizing: border-box;
+      /* touch-action: pan-x; */
+    }
 
-      /* 布局 */
-      /* div,
+    body {
+      width: 100%;
+    }
+
+    .coverimg {
+      background-size: cover;
+      background-position: 50%;
+    }
+
+    div,
+    img {
+      user-select: none;
+      -webkit-tap-highlight-color: rgba(255, 0, 0, 0);
+    }
+
+    /* 布局 */
+    /* div,
       ul,
       p {
         outline: 1px solid #00cec9;
       } */
-    </style>
-  </head>
-  <body>
-    <noscript>
-      <strong
-        >We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
+  </style>
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
         properly without JavaScript enabled. Please enable it to
-        continue.</strong
-      >
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+        continue.</strong>
+  </noscript>
+  <div id="app"></div>
+  <!-- built files will be auto injected -->
+</body>
+
 </html>

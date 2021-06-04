@@ -1,29 +1,29 @@
 <template>
-  <div class="home">
-    <!-- 轮播展示 -->
-    <div class="banner">
-      <Swiper :list="bannerList" />
+    <div class="home">
+        <!-- 轮播展示 -->
+        <div class="banner">
+            <Swiper :list="bannerList" />
+        </div>
+        <!-- slide 展示 -->
+        <div class="slide">
+            <div class="slide-title">
+                Hot Sale New Style
+            </div>
+            <Slider :list='hotsaleList[0]' />
+            <Slider :list='hotsaleList[1]' />
+        </div>
+        <!-- tab + lsit 展示 -->
+        <div class="grid">
+            <!-- tabs -->
+            <van-tabs v-model="curTabName" color="#000000" line-height='1px' line-width='90px' :ellipsis="false">
+                <van-tab v-for="(tab,i) in TabList" :key="i" :title="tab" :name="tab"></van-tab>
+            </van-tabs>
+            <!-- ----------- -->
+            <Grid :list="curListForTab" />
+            <!-- ----------- -->
+        </div>
+        <div class="seemore" @click="handleSeemore">更多</div>
     </div>
-    <!-- slide 展示 -->
-    <div class="slide">
-      <div class="slide-title">
-        Hot Sale New Style
-      </div>
-      <Slider :list='hotsaleList[0]' />
-      <Slider :list='hotsaleList[1]' />
-    </div>
-    <!-- tab + lsit 展示 -->
-    <div class="grid">
-      <!-- tabs -->
-      <van-tabs v-model="curTabName" color="#000000" line-height='1px' line-width='90px' :ellipsis="false">
-        <van-tab v-for="(tab,i) in TabList" :key="i" :title="tab" :name="tab"></van-tab>
-      </van-tabs>
-      <!-- ----------- -->
-      <Grid :list="curListForTab" />
-      <!-- ----------- -->
-    </div>
-    <div class="seemore" @click="handleSeemore">更多</div>
-  </div>
 </template>
 <script>
 import Swiper from "@/components/Swiper";

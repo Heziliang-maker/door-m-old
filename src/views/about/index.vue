@@ -7,7 +7,7 @@
     <div class="title">About US</div>
     <div class="wrapper">
       <div class="banner">
-        <img src="@/assets/banner.png" alt="">
+        <img src="@/assets/map.png" alt="">
       </div>
       <div class="text">
         <header>Company profile</header>

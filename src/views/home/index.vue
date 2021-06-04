@@ -44,7 +44,6 @@ export default {
 
     data() {
         return {
-            // isLoaded: false,
             bannerList: [],
             hotsaleList: [[], []], //avoid error
             cateMap: [],

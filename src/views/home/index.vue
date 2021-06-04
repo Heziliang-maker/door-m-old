@@ -22,7 +22,9 @@
       <Grid :list="curListForTab" />
       <!-- ----------- -->
     </div>
-    <div class="seemore" @click="handleSeemore">更多</div>
+    <div class="seemore" @click="handleSeemore">
+      <div>more ></div>
+    </div>
   </div>
 </template>
 <script>
@@ -125,18 +127,21 @@ export default {
     width: 100%;
     height: 200px;
 }
-
 .seemore {
-    width: 54px;
-    height: 24px;
-    background: #000000;
-    font-size: 10px;
-    font-family: PingFangSC-Regular, PingFang SC;
-    font-weight: 400;
-    color: #ffffff;
-    line-height: 24px;
     text-align: center;
+    width: 54px;
+
+    background: #000000;
     margin: 10px auto 20px;
-    cursor: pointer;
+    line-height: 24px;
+    & > div {
+        height: 24px;
+        font-size: 10px;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: #ffffff;
+        line-height: 24px;
+        cursor: pointer;
+    }
 }
 </style>

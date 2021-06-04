@@ -4,7 +4,7 @@
 -->
 <template>
   <div class="aboutus">
-    <div class="title">About US</div>
+    <div class="title">About Us</div>
     <div class="wrapper">
       <div class="banner">
         <img src="@/assets/map.png" alt="">

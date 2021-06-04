@@ -30,7 +30,6 @@ export default {
     line-height: 150px;
     text-align: center;
     height: 124.85px;
-    // background-color: #39a9ed;
 }
 img {
     width: 100%;

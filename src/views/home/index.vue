@@ -92,7 +92,7 @@ export default {
                 path: "/more",
                 query: {
                     tabName: this.curTabName,
-                    list: this.curListForTab
+                    list: JSON.stringify(this.curListForTab)
                 }
             });
         }

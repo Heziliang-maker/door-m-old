@@ -16,7 +16,8 @@
 .header {
     height: 44px;
     display: flex;
-    justify-content: center;
+    // justify-content: center;
+    padding-left: 19px;
     align-items: center;
 
     .logo {

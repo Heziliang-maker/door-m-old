@@ -5,7 +5,6 @@
       <div class="banner">
         <Swiper :list="bannerList" />
       </div>
-      <!-- <div class="seemore" @click="handleSeemore">更多</div> -->
     </div>
     <!-- slide 展示 -->
     <div class="slide">
@@ -53,7 +52,7 @@ export default {
             hotsaleList: [[], []], //avoid error
             cateMap: [],
             curTabName: "Outdoor&Camping Tent",
-            TabList: ["Outdoor&Camping Tent", "Sportswear", "Adult", "Fashion Clothes", "Household Supplies "]
+            TabList: []
         };
     },
     beforeCreate() {
@@ -78,6 +77,7 @@ export default {
                 let list1 = data.portalsHotProduct.slice(0, 3);
                 let list2 = data.portalsHotProduct.slice(3);
                 this.hotsaleList = [list1, list2]; //not responsive
+                this.TabList = Object.keys(data.stringListMap);
                 this.cateMap = data.stringListMap;
 
                 this.$nextTick(() => {

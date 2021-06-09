@@ -27,6 +27,8 @@
     <div class="seemore" @click="handleSeemore">
       <div>more ></div>
     </div>
+    <div class="discount_btn"><img src="discount_btn" alt="discount"></div>
+    <van-overlay class="discount_overlay" :show="showCard" @click="showCard = false" />
   </div>
 </template>
 <script>
@@ -48,10 +50,11 @@ export default {
 
     data() {
         return {
+            showCard: false,
             bannerList: [],
             hotsaleList: [[], []], //avoid error
             cateMap: [],
-            curTabName: "",
+            curTabName: "", //当前tab key
             TabList: []
         };
     },
@@ -146,6 +149,15 @@ export default {
         color: #ffffff;
         line-height: 24px;
         cursor: pointer;
+    }
+}
+.discount_btn {
+    position: fixed;
+    right: 21px;
+    bottom: 29px;
+    img {
+        width: 77px;
+        height: 77px;
     }
 }
 </style>

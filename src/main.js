@@ -21,6 +21,7 @@ import {
   Image as VanImage,
   Skeleton,
   Loading,
+  Overlay,
 } from "vant";
 
 import "vant/lib/swipe/style";
@@ -32,6 +33,7 @@ import "vant/lib/collapse-item/style";
 import "vant/lib/collapse/style";
 import "vant/lib/loading/style";
 import "vant/lib/skeleton/style";
+import "vant/lib/overlay/style";
 
 Vue.use(VanImage);
 Vue.use(Swipe);
@@ -44,6 +46,7 @@ Vue.use(Loading);
 Vue.use(Collapse);
 Vue.use(CollapseItem);
 Vue.use(Skeleton);
+Vue.use(Overlay);
 
 // 跳转
 Vue.directive("jumpTo", function(el, binding) {

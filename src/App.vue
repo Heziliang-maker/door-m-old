@@ -101,7 +101,7 @@ export default {
         },
         async getCounryInfo() {
             // 获取ip对应的countryCode
-            let { data } = await axios.get("http://ip-api.com/json");
+            let { data } = await axios.get("https://www.buykop.com/ip-api");
             // 获取countryCode对应的国家的汇率和货币符号 语言
             let myLocalInfo = await queryLocalLanguage(data.countryCode);
             //根据语言 setCookie => 对插件进行默认设置

@@ -11,6 +11,11 @@
     </div>
     <transition name="van-fade">
       <Overlay v-if="showCard" :show.sync="showCard" />
+
+    </transition>
+    <transition name="van-fade">
+      <div v-show="isProductPage" ref="btnForDiscount" class="discount_btn" @click="handleGetDiscount"><img
+             src="@/assets/discount_btn.png" alt="discount"></div>
     </transition>
   </div>
 </template>
@@ -57,6 +62,13 @@ export default {
             originLang: ""
         };
     },
+    computed: {
+        isProductPage() {
+            const { path } = this.$route;
+            const routeFilter = ["/home", "/more"];
+            return routeFilter.includes(path);
+        }
+    },
     mounted() {
         // 获取语言和汇率以及货币符号
         this.getCounryInfo();
@@ -81,6 +93,7 @@ export default {
             if (res.status === "success") {
                 // 重置
                 this.ccy = res.result.ccySymbol;
+                console.log("货币符号是=>", this.ccy);
                 this.rate = res.result.rate;
             } else {
                 this.$toast(res.errorMsg);
@@ -104,6 +117,9 @@ export default {
             } else {
                 this.$toast("Fill in your email and subscribe");
             }
+        },
+        handleGetDiscount() {
+            this.showCard = true;
         }
     }
 };
@@ -151,5 +167,17 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.discount_btn {
+    position: fixed;
+    right: 21px;
+    bottom: 29px;
+    transition: opacity 0.4s linear;
+    transition-delay: 0.3s;
+    z-index: 99;
+    img {
+        width: 77px;
+        height: 77px;
+    }
 }
 </style>

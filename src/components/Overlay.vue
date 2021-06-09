@@ -81,6 +81,7 @@ export default {
                     this.$toast(res.errorMsg);
                 }
             } else {
+                console.log("=>", "..");
                 this.$toast("Fill in your email and subscribe");
             }
         },
@@ -105,7 +106,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 20001;
+    z-index: 2000;
 }
 // 遮罩层-内容
 .dialog {
@@ -219,9 +220,10 @@ export default {
         .list {
             width: 100%;
             box-sizing: border-box;
-            padding: 30px 0 50px;
+            padding-top: 30px;
             ul {
                 width: 100%;
+                padding-bottom: 3px;
                 li.list-item {
                     &:not(:last-of-type) {
                         margin-bottom: 20px;

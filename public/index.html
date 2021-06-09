@@ -47,6 +47,7 @@
         position: fixed;
         top: 7px !important;
         right: 10px !important;
+        z-index: 1999 !important;
       }
 
       #google_translate_element img {
@@ -94,9 +95,13 @@
     </style>
   </head>
   <body>
+    <!-- <script src="https://cdn.bootcss.com/vConsole/3.3.4/vconsole.min.js"></script>
     <script>
-      // 判断是否是移动端
-    </script>
+      // 初始化
+      var vConsole = new VConsole();
+      console.log("Hello world");
+      console.log('=>',"₽")
+    </script> -->
     <noscript>
       <strong
         >We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work

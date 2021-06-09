@@ -27,8 +27,8 @@
     <div class="seemore" @click="handleSeemore">
       <div>more ></div>
     </div>
-    <div ref="btnForDiscount" class="discount_btn" @click="handleGetDiscount"><img src="@/assets/discount_btn.png"
-           alt="discount"></div>
+    <!-- <div ref="btnForDiscount" class="discount_btn" @click="handleGetDiscount"><img src="@/assets/discount_btn.png"
+           alt="discount"></div> -->
   </div>
 </template>
 <script>
@@ -69,7 +69,7 @@ export default {
         this.initData();
     },
     mounted() {
-        this.$refs.btnForDiscount.style.opacity = 1;
+        // this.$refs.btnForDiscount.style.opacity = 1;
     },
     computed: {
         curListForTab() {
@@ -107,7 +107,6 @@ export default {
             });
         },
         handleGetDiscount() {
-            console.log("=>", "..?");
             // this.showCard = true;
             this.$emit("update:show", true);
         }
@@ -170,9 +169,11 @@ export default {
     opacity: 0;
     transition: opacity 0.4s linear;
     transition-delay: 0.3s;
+    z-index: 99;
     img {
         width: 77px;
         height: 77px;
     }
 }
 </style>
+

@@ -8,7 +8,7 @@
       {{tabName}}
     </div>
     <!-- ----------- -->
-    <Grid :list="list" />
+    <Grid :rate='rate' :ccy='ccy' :list="list" />
     <!-- ----------- -->
   </div>
 </template>
@@ -17,6 +17,10 @@
 import Grid from "@/components/Grid";
 export default {
     name: "more",
+    props: {
+        ccy: String,
+        rate: String | Number
+    },
     data() {
         return {
             // 默认标题
@@ -33,6 +37,7 @@ export default {
     mounted() {
         console.log("=>", "mounted");
         this.init();
+        
     },
     methods: {
         init() {

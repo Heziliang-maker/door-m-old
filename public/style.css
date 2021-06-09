@@ -1,0 +1,30 @@
+html {
+}
+.goog-te-menu2-item div span {
+  color: #000;
+}
+.goog-te-menu2-item div {
+  background: none !important;
+}
+.goog-te-menu2-item div span:hover {
+  color: #162d75;
+}
+.goog-te-menu2-item-selected div span {
+  color: #000;
+}
+.goog-te-menu2 {
+  border-radius: 5px;
+  border: none;
+  /* box-shadow: 0 3px 8px 2px #ccc; */
+}
+.goog-te-menu2 {
+  padding-top: 15px;
+  width: 100% !important;
+  background: #fff !important;
+  box-sizing: border-box !important;
+  padding-left: 20px;
+  height: 100% !important;
+}
+.goog-te-menu2 table {
+  width: 100% !important;
+}

@@ -8,7 +8,7 @@
       {{tabName}}
     </div>
     <!-- ----------- -->
-    <Grid :list="list" />
+    <Grid :rate='rate' :ccy='ccy' :list="list" />
     <!-- ----------- -->
   </div>
 </template>
@@ -17,6 +17,10 @@
 import Grid from "@/components/Grid";
 export default {
     name: "more",
+    props: {
+        ccy: String,
+        rate: String | Number
+    },
     data() {
         return {
             // 默认标题
@@ -28,13 +32,19 @@ export default {
         Grid
     },
     created() {
+        console.log("=>", "created");
+    },
+    mounted() {
+        console.log("=>", "mounted");
         this.init();
+        
     },
     methods: {
         init() {
+            console.log("this.$route=>", this.$route);
             const { query } = this.$route;
             const { tabName, list } = query;
-            this.list = list;
+            this.list = JSON.parse(list);
             this.tabName = tabName;
         }
     }

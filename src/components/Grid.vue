@@ -12,11 +12,16 @@
           </div>
           <div class="item-desc" v-html="item.productName">
           </div>
-          <div class="item-price">
-            <span>
+          <div class="item-price notranslate">
+            <div class="current">
+              <span class="current-price" v-html="$options.filters.priceGroup(item.retailPrice)"></span>
+              <span class="local-price"
+                    v-if="rate&&rate!=1&&ccy!=='$'">≈{{ccy}} {{(item.retailPrice*rate).toFixed(2)}}</span>
+            </div>
+            <!-- <span>
               ${{item.retailPrice.toString().split('.')[0]}}<a>{{item.retailPrice.toString().split('.').length>1?item.retailPrice.toString().split('.')[1]:''}}</a>
-            </span>
-            <span>{{item.reamt?'$'+(((item.retailPrice*100)-0+(item.reamt*100))/100).toFixed(2):''}}</span>
+            </span> -->
+            <span class="origin" v-html="$options.filters.countFix(item.reamt,item.retailPrice)"></span>
           </div>
         </div>
       </van-grid-item>
@@ -32,7 +37,9 @@ export default {
             default() {
                 return [];
             }
-        }
+        },
+        ccy: String,
+        rate: String | Number
     }
 };
 </script>
@@ -54,6 +61,8 @@ export default {
             }
         }
         .item-desc {
+            width: 100%;
+            box-sizing: border-box;
             font-size: 12px;
             font-family: PingFangSC-Regular, PingFang SC;
             font-weight: 400;
@@ -67,28 +76,55 @@ export default {
 
             margin-bottom: 12px;
         }
-        .item-price {
-            align-self: flex-start;
-            line-height: 17px;
-            display: flex;
-            & span:first-of-type {
-                font-size: 14px;
-                font-family: PingFangSC-Semibold, PingFang SC;
-                font-weight: 600;
-                color: #de3434;
-                margin-right: 7px;
+        ::v-deep .item-price {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            & .current {
                 display: flex;
-                align-items: flex-start;
-                font-size: 18px;
-                font-weight: 600;
+                // font-size: 14px;
+                // font-family: PingFangSC-Semibold, PingFang SC;
+                // font-weight: 600;
+                // color: #de3434;
+                // margin-right: 7px;
+                // display: flex;
+                // align-items: flex-start;
+                // font-size: 18px;
+                // font-weight: 600;
 
-                a {
-                    margin-left: 2px;
-                    font-size: 12px;
-                    line-height: 12px;
+                // a {
+                //     margin-left: 2px;
+                //     font-size: 12px;
+                //     line-height: 12px;
+                // }
+                flex: 3;
+                .current-price {
+                    display: flex;
+                    align-items: flex-start;
+                    font-size: 18px;
+                    font-weight: 600;
+                    color: #de3434;
+                    line-height: 17px;
+                    // margin-right: 7px;
+                    a {
+                        margin-left: 2px;
+                        font-size: 12px;
+                        line-height: 12px;
+                    }
+                }
+
+                .local-price {
+                    font-size: 14px;
+                    font-family: PingFangSC-Regular, PingFang SC;
+                    font-weight: 400;
+                    color: #666666;
+                    margin-left: 5px;
                 }
             }
-            & span:last-of-type {
+            & .origin {
+                flex: 1;
+                text-decoration: line-through;
                 font-size: 12px;
                 font-family: PingFangSC-Regular, PingFang SC;
                 font-weight: 400;

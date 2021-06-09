@@ -21,6 +21,9 @@ import {
   Image as VanImage,
   Skeleton,
   Loading,
+  // Overlay,
+  Icon,
+  Toast,
 } from "vant";
 
 import "vant/lib/swipe/style";
@@ -32,6 +35,9 @@ import "vant/lib/collapse-item/style";
 import "vant/lib/collapse/style";
 import "vant/lib/loading/style";
 import "vant/lib/skeleton/style";
+// import "vant/lib/overlay/style";
+import "vant/lib/icon/style";
+import "vant/lib/toast/style";
 
 Vue.use(VanImage);
 Vue.use(Swipe);
@@ -44,7 +50,28 @@ Vue.use(Loading);
 Vue.use(Collapse);
 Vue.use(CollapseItem);
 Vue.use(Skeleton);
+// Vue.use(Overlay);
+Vue.use(Icon);
+Vue.use(Toast);
+// 国际化
+import "@/utils/translate_a.js";
+//copy功能
+import VueClipboard from "vue-clipboard2";
 
+Vue.use(VueClipboard);
+//过滤器
+Vue.filter("countFix", (val1, val2) => {
+  //差价求和
+  return val1 ? "$" + ((val2 * 100 + val1 * 100) / 100).toFixed(2) : "";
+});
+Vue.filter("priceGroup", (val) => {
+  //价格整数与小数分割
+  return `$${val.toString().split(".")[0] - 0}</span><a>${
+    val.toString().split(".").length > 1 ? val.toString().split(".")[1] : ""
+  }</a>`;
+});
+
+Vue.prototype.$toast = Toast;
 // 跳转
 Vue.directive("jumpTo", function(el, binding) {
   let targrtUrl = binding.value;

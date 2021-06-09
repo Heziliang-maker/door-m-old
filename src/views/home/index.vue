@@ -21,12 +21,14 @@
         <van-tab v-for="(tab,i) in TabList" :key="i" :title="tab" :name="tab"></van-tab>
       </van-tabs>
       <!-- ----------- -->
-      <Grid :list="curListForTab" />
+      <Grid :rate='rate' :ccy='ccy' :list="curListForTab" />
       <!-- ----------- -->
     </div>
     <div class="seemore" @click="handleSeemore">
       <div>more ></div>
     </div>
+    <!-- <div ref="btnForDiscount" class="discount_btn" @click="handleGetDiscount"><img src="@/assets/discount_btn.png"
+           alt="discount"></div> -->
   </div>
 </template>
 <script>
@@ -39,6 +41,11 @@ import Footer from "@/layout/Footer";
 import axios from "axios";
 export default {
     name: "home",
+    props: {
+        show: Boolean,
+        ccy: String,
+        rate: String | Number
+    },
     components: {
         Swiper,
         Slider,
@@ -51,7 +58,7 @@ export default {
             bannerList: [],
             hotsaleList: [[], []], //avoid error
             cateMap: [],
-            curTabName: "Outdoor&Camping Tent",
+            curTabName: "", //当前tab key
             TabList: []
         };
     },
@@ -60,6 +67,9 @@ export default {
     },
     created() {
         this.initData();
+    },
+    mounted() {
+        // this.$refs.btnForDiscount.style.opacity = 1;
     },
     computed: {
         curListForTab() {
@@ -78,6 +88,7 @@ export default {
                 let list2 = data.portalsHotProduct.slice(3);
                 this.hotsaleList = [list1, list2]; //not responsive
                 this.TabList = Object.keys(data.stringListMap);
+                this.curTabName = this.TabList[0]; //默认为第一项
                 this.cateMap = data.stringListMap;
 
                 this.$nextTick(() => {
@@ -91,9 +102,13 @@ export default {
                 path: "/more",
                 query: {
                     tabName: this.curTabName,
-                    list: this.curListForTab
+                    list: JSON.stringify(this.curListForTab)
                 }
             });
+        },
+        handleGetDiscount() {
+            // this.showCard = true;
+            this.$emit("update:show", true);
         }
     }
 };
@@ -147,4 +162,18 @@ export default {
         cursor: pointer;
     }
 }
+.discount_btn {
+    position: fixed;
+    right: 21px;
+    bottom: 29px;
+    opacity: 0;
+    transition: opacity 0.4s linear;
+    transition-delay: 0.3s;
+    z-index: 99;
+    img {
+        width: 77px;
+        height: 77px;
+    }
+}
 </style>
+

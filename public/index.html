@@ -1,61 +1,119 @@
 <!DOCTYPE html>
 <html lang="">
-
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <!-- <meta name="viewport" content="width=device-width,initial-scale=1.0," /> -->
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no,viewport-fit:cover" />
-  <!-- <link
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- <meta name="viewport" content="width=device-width,initial-scale=1.0," /> -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no,viewport-fit:cover"
+    />
+    <!-- <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     /> -->
-  <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
-  <title>Buykop</title>
-  <style>
-    html {
-      width: 100%;
-      box-sizing: border-box;
-      /* touch-action: pan-x; */
-    }
+    <link rel="icon" href="<%= BASE_URL %>favicon.png" />
+    <title>Buykop</title>
+    <style>
+      html {
+        width: 100%;
+        box-sizing: border-box;
+        /* touch-action: pan-x; */
+      }
 
-    body {
-      width: 100%;
-    }
+      body {
+        width: 100%;
+      }
 
-    .coverimg {
-      background-size: cover;
-      background-position: 50%;
-    }
+      .coverimg {
+        background-size: cover;
+        background-position: 50%;
+      }
 
-    div,
-    img {
-      user-select: none;
-      -webkit-tap-highlight-color: rgba(255, 0, 0, 0);
-    }
+      div,
+      img {
+        user-select: none;
+        -webkit-tap-highlight-color: rgba(255, 0, 0, 0);
+      }
 
-    /* 布局 */
-    /* div,
-      ul,
+      /* 布局 */
+      /* div,
       p {
         outline: 1px solid #00cec9;
       } */
     </style>
+    <style>
+      #google_translate_element {
+        position: fixed;
+        top: 7px !important;
+        right: 10px !important;
+        z-index: 1999 !important;
+      }
+
+      #google_translate_element img {
+        display: none;
+      }
+
+      #google_translate_element .goog-te-gadget {
+        padding: 0 10px;
+      }
+
+      .goog-te-gadget {
+        padding: 10px;
+      }
+
+      .goog-te-gadget-simple {
+        height: 30px;
+        display: flex !important;
+        align-items: center;
+        padding: 0 10px;
+        border-radius: 15px;
+        border: none !important;
+        box-shadow: 0 0 3px 0 #afafaf;
+      }
+
+      .goog-te-gadget-simple .goog-te-menu-value span {
+        margin: 0 3px;
+      }
+
+      body {
+        top: 0 !important;
+        z-index: 1;
+      }
+
+      .goog-te-banner-frame {
+        display: none;
+      }
+
+      .goog-te-menu-frame {
+        border-radius: 5px;
+        width: 250px !important;
+        box-shadow: 0 3px 8px 2px #ddd !important;
+        height: 320px !important;
+        top: 60px !important;
+      }
+    </style>
   </head>
   <body>
+    <!-- <script src="https://cdn.bootcss.com/vConsole/3.3.4/vconsole.min.js"></script>
     <script>
-      // 判断是否是移动端
-      
-    </script>
+      // 初始化
+      var vConsole = new VConsole();
+      console.log("Hello world");
+      console.log('=>',"₽")
+    </script> -->
     <noscript>
       <strong
         >We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
         properly without JavaScript enabled. Please enable it to
-        continue.</strong>
-  </noscript>
-  <div id="app"></div>
-  <!-- built files will be auto injected -->
-</body>
-
+        continue.</strong
+      >
+    </noscript>
+    <div id="app"></div>
+    <div
+      id="google_translate_element"
+      style="position:fixed;right:70px;z-index:2000;opacity:1"
+    ></div>
+    <!-- built files will be auto injected -->
+  </body>
 </html>

@@ -526,7 +526,7 @@ function Translate(myLanguage) {
     document
       .getElementsByClassName("goog-te-menu-frame")[0]
       .contentWindow.document.head.appendChild(cssLink);
-    console.log(document.getElementsByClassName("goog-te-menu-frame")[0]);
+    // console.log(document.getElementsByClassName("goog-te-menu-frame")[0]);
   }, 1000);
 }
 

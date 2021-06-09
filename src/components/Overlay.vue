@@ -106,7 +106,6 @@ export default {
     justify-content: center;
     align-items: center;
     z-index: 20001;
-    transition: all 0.3s;
 }
 // 遮罩层-内容
 .dialog {

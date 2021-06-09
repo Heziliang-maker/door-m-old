@@ -9,7 +9,9 @@
     <div class="layout-footer notranslate" v-if="isReady">
       <Footer />
     </div>
-    <Overlay v-if="showCard" :show.sync="showCard" />
+    <transition name="van-fade">
+      <Overlay v-if="showCard" :show.sync="showCard" />
+    </transition>
   </div>
 </template>
 <script>

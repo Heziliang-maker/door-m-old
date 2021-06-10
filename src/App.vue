@@ -10,8 +10,7 @@
       <Footer />
     </div>
     <transition name="van-fade">
-      <Overlay v-if="showCard" :show.sync="showCard" />
-
+      <Overlay v-show="showCard" :show.sync="showCard" />
     </transition>
     <transition name="van-fade">
       <div v-show="isProductPage" ref="btnForDiscount" class="discount_btn" @click="handleGetDiscount"><img
@@ -93,7 +92,6 @@ export default {
             if (res.status === "success") {
                 // 重置
                 this.ccy = res.result.ccySymbol;
-                console.log("货币符号是=>", this.ccy);
                 this.rate = res.result.rate;
             } else {
                 this.$toast(res.errorMsg);
@@ -101,21 +99,16 @@ export default {
         },
         async getCounryInfo() {
             // 获取ip对应的countryCode
-            let { data } = await axios.get("https://www.buykop.com/ip-api");
+            // let { data } = await axios.get("https://www.buykop.com/ip-api");
             // 获取countryCode对应的国家的汇率和货币符号 语言
-            let myLocalInfo = await queryLocalLanguage(data.countryCode);
-            //根据语言 setCookie => 对插件进行默认设置
-            cookie.set("googtrans", "/auto/" + myLocalInfo.result.language);
-            //根据货币 汇率 渲染格式化
-            this.Translate(myLocalInfo.result.language);
-        },
-        async handleSubscribe() {
-            if (this.email) {
-                let value = await queryDiscount();
-                console.log("=>", "value");
-                this.step = 2;
-            } else {
-                this.$toast("Fill in your email and subscribe");
+            // let res = await queryLocalLanguage(data.countryCode);
+            let res = await queryLocalLanguage();
+            // console.log("myLocalInfo=>", myLocalInfo);
+            if (res.status === "success") {
+                //根据语言 setCookie => 对插件进行默认设置
+                cookie.set("googtrans", "/auto/" + res.result.language);
+                //根据货币 汇率 渲染格式化
+                this.Translate(res.result.language);
             }
         },
         handleGetDiscount() {
@@ -140,7 +133,7 @@ export default {
     background: #fff;
 }
 .layout-main {
-    margin-top: 51px;
+    margin-top: 44px;
 }
 .layout-footer {
     //

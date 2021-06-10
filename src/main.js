@@ -25,7 +25,7 @@ import {
   Icon,
   Toast,
 } from "vant";
-
+Toast.setDefaultOptions({ className: "notranslate" });
 import "vant/lib/swipe/style";
 import "vant/lib/swipe-item/style";
 import "vant/lib/tabs/style";

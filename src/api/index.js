@@ -25,17 +25,25 @@ export function queryLanguage(data) {
     url: "/portals/change_rate",
     method: "post",
     data: {
-      "language": data,
+      language: data,
     },
   });
 }
+
 // 地区查询语言汇率
-export function queryLocalLanguage(data) {
+// export function queryLocalLanguage(data) {
+//   return request({
+//     url: "/portals/query_language_rate",
+//     method: "post",
+//     data: {
+//       country: data,
+//     },
+//   });
+// }
+// 地区查询语言汇率
+export function queryLocalLanguage() {
   return request({
-    url: "/portals/query_language_rate",
-    method: "post",
-    data: {
-      country: data,
-    },
+    url: "/portals/query_test",
+    method: "get",
   });
 }

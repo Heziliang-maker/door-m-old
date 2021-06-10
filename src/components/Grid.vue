@@ -15,8 +15,8 @@
           <div class="item-price notranslate">
             <div class="current">
               <span class="current-price" v-html="$options.filters.priceGroup(item.retailPrice)"></span>
-              <span class="local-price" v-if="rate&&rate!=1&&ccy!=='$'">≈{{ccy}}
-                {{(item.retailPrice*rate).toFixed(2)}}</span>
+              <span class="local-price"
+                    v-if="rate&&rate!=1&&ccy!=='$'">≈{{ccy}} {{(item.retailPrice*rate).toFixed(2)}}</span>
             </div>
             <!-- <span>
               ${{item.retailPrice.toString().split('.')[0]}}<a>{{item.retailPrice.toString().split('.').length>1?item.retailPrice.toString().split('.')[1]:''}}</a>

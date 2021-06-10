@@ -41,6 +41,8 @@ export function queryLanguage(data) {
 //   });
 // }
 // 地区查询语言汇率
+
+
 export function queryLocalLanguage() {
   return request({
     url: "/portals/query_test",

@@ -10,8 +10,7 @@
       <Footer />
     </div>
     <transition name="van-fade">
-      <Overlay v-if="showCard" :show.sync="showCard" />
-
+      <Overlay v-show="showCard" :show.sync="showCard" />
     </transition>
     <transition name="van-fade">
       <div v-show="isProductPage" ref="btnForDiscount" class="discount_btn" @click="handleGetDiscount"><img
@@ -108,15 +107,6 @@ export default {
             cookie.set("googtrans", "/auto/" + myLocalInfo.result.language);
             //根据货币 汇率 渲染格式化
             this.Translate(myLocalInfo.result.language);
-        },
-        async handleSubscribe() {
-            if (this.email) {
-                let value = await queryDiscount();
-                console.log("=>", "value");
-                this.step = 2;
-            } else {
-                this.$toast("Fill in your email and subscribe");
-            }
         },
         handleGetDiscount() {
             this.showCard = true;

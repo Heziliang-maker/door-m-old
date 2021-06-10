@@ -1,5 +1,5 @@
 <template>
-  <div id="overlay" @click.self="$emit('update:show',false)">
+  <div id="overlay" @click.self="$emit('update:show',false)" class="notranslate">
     <div class="dialog">
       <div class="header">
         <van-icon name="cross" @click.self="$emit('update:show',false)" />
@@ -17,7 +17,7 @@
         <div class="email-btn">
           <input v-model="email" placeholder="Email Address" type="text" @keyup.enter="handleSubscribe">
         </div>
-        <div class="subscribe-btn" @click="handleSubscribe">SUBSCRIPTION IS AVAILABLE</div>
+        <div class="subscribe-btn" @click="handleSubscribe">Subscribe</div>
       </div>
       <div class="main-2" v-else>
         <div class="title">
@@ -81,7 +81,6 @@ export default {
                     this.$toast(res.errorMsg);
                 }
             } else {
-                console.log("=>", "..");
                 this.$toast("Fill in your email and subscribe");
             }
         },

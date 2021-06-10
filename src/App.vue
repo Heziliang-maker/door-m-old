@@ -133,7 +133,7 @@ export default {
     background: #fff;
 }
 .layout-main {
-    margin-top: 51px;
+    margin-top: 44px;
 }
 .layout-footer {
     //

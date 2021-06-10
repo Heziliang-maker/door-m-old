@@ -92,7 +92,6 @@ export default {
             if (res.status === "success") {
                 // 重置
                 this.ccy = res.result.ccySymbol;
-                console.log("货币符号是=>", this.ccy);
                 this.rate = res.result.rate;
             } else {
                 this.$toast(res.errorMsg);
@@ -100,13 +99,17 @@ export default {
         },
         async getCounryInfo() {
             // 获取ip对应的countryCode
-            let { data } = await axios.get("https://www.buykop.com/ip-api");
+            // let { data } = await axios.get("https://www.buykop.com/ip-api");
             // 获取countryCode对应的国家的汇率和货币符号 语言
-            let myLocalInfo = await queryLocalLanguage(data.countryCode);
-            //根据语言 setCookie => 对插件进行默认设置
-            cookie.set("googtrans", "/auto/" + myLocalInfo.result.language);
-            //根据货币 汇率 渲染格式化
-            this.Translate(myLocalInfo.result.language);
+            // let res = await queryLocalLanguage(data.countryCode);
+            let res = await queryLocalLanguage();
+            // console.log("myLocalInfo=>", myLocalInfo);
+            if (res.status === "success") {
+                //根据语言 setCookie => 对插件进行默认设置
+                cookie.set("googtrans", "/auto/" + res.result.language);
+                //根据货币 汇率 渲染格式化
+                this.Translate(res.result.language);
+            }
         },
         handleGetDiscount() {
             this.showCard = true;

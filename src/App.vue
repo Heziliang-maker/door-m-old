@@ -88,6 +88,8 @@ export default {
             this.isReady = isReady;
         },
         async handleSelectLang(cookieLang) {
+            // 防止初始化第一次报错
+            if (!cookieLang) return;
             let res = await queryLanguage(cookieLang.split("/")[2]);
             if (res.status === "success") {
                 // 重置

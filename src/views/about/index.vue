@@ -11,8 +11,16 @@
       </div>
       <div class="text">
         <header>Company profile</header>
-        <main>Formularay Information Technology (Shanghai) Co., Ltd. is located in Shanghai and serves the world.
-          Committed to building a global manufacturing to consumer e-commerce services ecosystem.</main>
+        <main>"Kop" comes from the word used by the conductor of an ancient Chinese orchestra to describe a
+          performer who plays beautiful music according to the score. In contemporary Chinese, it means
+          reliable, trustworthy and entrusted.
+          We created the "Buykop" platform make brand manufacturers and consumers directly connect, so
+          that consumers will know the products were made by who, how to make out.Consumers can directly
+          purchase products from brand manufacturers in the brand online mall, And by "BUYKOP" supervision
+          brand manufacturers to provide perfect quality and after-sales protection.
+          We hope to bring more high-quality and inexpensive products to global consumers through the
+          "BuyKop", so that bring more and more happiness to your family.
+        </main>
       </div>
     </div>
   </div>

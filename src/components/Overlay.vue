@@ -84,6 +84,7 @@ export default {
                 this.$toast("Fill in your email and subscribe");
             }
         },
+       
         onCopy() {
             this.$toast("Successfully copied");
         },

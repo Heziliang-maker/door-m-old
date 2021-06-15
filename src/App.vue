@@ -10,7 +10,7 @@
       <Footer />
     </div>
     <transition name="van-fade">
-      <Overlay v-show="showCard" :show.sync="showCard" />
+      <Overlay :key="overlayKey" v-show="showCard" :show.sync="showCard" />
     </transition>
     <transition name="van-fade">
       <div v-show="isProductPage" ref="btnForDiscount" class="discount_btn" @click="handleGetDiscount"><img
@@ -58,7 +58,8 @@ export default {
             // 汇率
             rate: 1.2,
             // 更改前的语言
-            originLang: ""
+            originLang: "",
+            overlayKey: 1
         };
     },
     computed: {
@@ -114,7 +115,21 @@ export default {
             }
         },
         handleGetDiscount() {
+            this.checkTime();
             this.showCard = true;
+        },
+        checkTime() {
+            const preTime = +localStorage.getItem("preTime");
+            if (!preTime) {
+                localStorage.setItem("preTime", Date.now());
+            } else {
+                let curTime = Date.now();
+                let gapTime = curTime - preTime;
+                if (gapTime > 86400000) {
+                    localStorage.removeItem("preTime");
+                    this.overlayKey++;
+                }
+            }
         }
     }
 };

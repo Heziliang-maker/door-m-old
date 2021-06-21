@@ -57,7 +57,7 @@ export default {
                     title: "Contact Us",
                     content: [
                         {
-                            label: "Tel：021-58358578"
+                            label: "Tel：+86-21-58358578"
                         },
                         {
                             label: "E-mail：service@buykop.com"

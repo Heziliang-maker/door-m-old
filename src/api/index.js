@@ -5,7 +5,7 @@ import request from "@/plugins/request";
 
 export function queryDiscount() {
   return request({
-    url: "/portals/query_discount",
+    url: "/portal/query_discount",
     method: "post",
   });
 }
@@ -13,7 +13,7 @@ export function queryDiscount() {
 //用户订阅
 export function userSubscribe(data) {
   return request({
-    url: "/portals/send_discount_email",
+    url: "/portal/send_discount_email",
     method: "post",
     data,
   });
@@ -22,7 +22,7 @@ export function userSubscribe(data) {
 // 语言汇率转换
 export function queryLanguage(data) {
   return request({
-    url: "/portals/change_rate",
+    url: "/portal/change_rate",
     method: "post",
     data: {
       language: data,
@@ -45,7 +45,7 @@ export function queryLanguage(data) {
 
 export function queryLocalLanguage() {
   return request({
-    url: "/portals/query_test",
+    url: "/portal/query_test",
     method: "get",
   });
 }

@@ -76,10 +76,9 @@ export default {
             return this.cateMap[this.curTabName];
         }
     },
-
     methods: {
         initData() {
-            const url = `/shop-admin/v1/portals/query_portals`;
+            const url = `/shop-admin/v1/portal/query_portals`;
             axios.post(url).then((res) => {
                 const { result } = res.data;
                 const [data] = result;

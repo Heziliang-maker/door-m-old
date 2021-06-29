@@ -13,11 +13,11 @@
         <header>Company profile</header>
         <main>"Kop" comes from the word used by the conductor of an ancient Chinese orchestra to describe a
           performer who plays beautiful music according to the score. In contemporary Chinese, it means
-          reliable, trustworthy and entrusted.
+          reliable, trustworthy and entrusted. <br/>
           We created the "Buykop" platform make brand manufacturers and consumers directly connect, so
           that consumers will know the products were made by who, how to make out.Consumers can directly
           purchase products from brand manufacturers in the brand online mall, And by "BUYKOP" supervision
-          brand manufacturers to provide perfect quality and after-sales protection.
+          brand manufacturers to provide perfect quality and after-sales protection.<br/>
           We hope to bring more high-quality and inexpensive products to global consumers through the
           "BuyKop", so that bring more and more happiness to your family.
         </main>

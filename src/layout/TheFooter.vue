@@ -22,7 +22,6 @@
         © 2021 I Midnight Sad Rose Limited All Rights Reserved I Be a visionary I Powered by Buykop
       </p>
     </div>
-
   </div>
 </template>
 

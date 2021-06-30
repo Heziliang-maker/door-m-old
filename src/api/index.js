@@ -2,7 +2,6 @@
 import request from "@/plugins/request";
 
 // 查询折扣
-
 export function queryDiscount() {
   return request({
     url: "/portal/query_discount",
@@ -31,21 +30,29 @@ export function queryLanguage(data) {
 }
 
 // 地区查询语言汇率
-// export function queryLocalLanguage(data) {
-//   return request({
-//     url: "/portals/query_language_rate",
-//     method: "post",
-//     data: {
-//       country: data,
-//     },
-//   });
-// }
-// 地区查询语言汇率
-
-
 export function queryLocalLanguage() {
   return request({
     url: "/portal/query_test",
     method: "get",
+  });
+}
+
+// 地区查询语言汇率
+export function trackViewBehavior(type, id = null, origin = null) {
+  return request({
+    url: "/analyze/portal/visit/view",
+    method: "post",
+    data: {
+      id: id,
+      origin: origin,
+      type: type,
+    },
+  });
+}
+
+export function queryPortalProducts() {
+  return request({
+    url: "/portal/query_portals",
+    method: "post",
   });
 }

@@ -35,10 +35,8 @@
 import Swiper from "@/components/Swiper";
 import Slider from "@/components/Slide";
 import Grid from "@/components/Grid";
-import Footer from "@/layout/Footer";
 
-// import
-import axios from "axios";
+import { queryPortalProducts } from "@/api";
 export default {
     name: "home",
     props: {
@@ -49,8 +47,7 @@ export default {
     components: {
         Swiper,
         Slider,
-        Grid,
-        Footer
+        Grid
     },
 
     data() {
@@ -78,10 +75,8 @@ export default {
     },
     methods: {
         initData() {
-            const url = `/shop-admin/v1/portal/query_portals`;
-            axios.post(url).then((res) => {
-                const { result } = res.data;
-                const [data] = result;
+            queryPortalProducts().then((res) => {
+                const data = res.result[0];
                 this.bannerList = data.portalsAdvDTOS;
                 let list1 = data.portalsHotProduct.slice(0, 3);
                 let list2 = data.portalsHotProduct.slice(3);

@@ -39,6 +39,8 @@ import "vant/lib/skeleton/style";
 import "vant/lib/icon/style";
 import "vant/lib/toast/style";
 
+import { trackViewBehavior } from "./api/index";
+
 Vue.use(VanImage);
 Vue.use(Swipe);
 Vue.use(SwipeItem);
@@ -74,9 +76,13 @@ Vue.filter("priceGroup", (val) => {
 Vue.prototype.$toast = Toast;
 // 跳转
 Vue.directive("jumpTo", function(el, binding) {
-  let targrtUrl = binding.value;
+  let [url, type, id] = binding.value;
   el.onclick = function() {
-    window.open(targrtUrl, "_blank");
+    const cb = async () => {
+      await trackViewBehavior(type, id);
+      window.open(url, "_blank");
+    };
+    cb();
   };
 });
 

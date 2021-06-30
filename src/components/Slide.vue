@@ -7,7 +7,7 @@
 
     <div class="probox">
       <!-- item -->
-      <div class="proitem clicks" v-for="(item,index) in list" :key="index" v-jumpTo=item.productUrl>
+      <div class="proitem clicks" v-for="(item,index) in list" :key="index" v-jumpTo=[item.productUrl,3]>
         <div class="proitem-top">
           <img :src="item.productImg[0]" alt="">
         </div>

@@ -6,9 +6,10 @@
   <div class="footer">
     <div class="footer-top">
       <van-collapse v-model="activeNames" :border="false">
-        <van-collapse-item ref="collapse" v-for=" (item,index) in collTextList" :title="item.title" :name="index">
+        <van-collapse-item ref="collapse" v-for=" (item,index) in collTextList" :key="item.title" :title="item.title"
+                           :name="index">
           <template slot:value>
-            <p v-for="sitem in item.content" @click="handleClickFoot(sitem.path)">{{sitem.label}}</p>
+            <p v-for="sitem in item.content" :key="item.label" @click="handleClickFoot(sitem.path)">{{sitem.label}}</p>
           </template>
         </van-collapse-item>
       </van-collapse>

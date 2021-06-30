@@ -19,13 +19,14 @@
   </div>
 </template>
 <script>
-import Header from "@/layout/Header";
-import Footer from "@/layout/Footer";
+import Header from "@/layout/TheHeader";
+import Footer from "@/layout/TheFooter";
 import Overlay from "@/components/Overlay";
 import cookie from "@/plugins/cookie";
 import axios from "axios";
-
 import { queryLanguage, queryLocalLanguage } from "@/api";
+import { trackViewBehavior } from "@/api/index";
+import { getViewId, setViewId } from "@/utils/view-auth";
 window.googleTranslateElementInit = () => {
     new google.translate.TranslateElement(
         {
@@ -67,6 +68,13 @@ export default {
             const { path } = this.$route;
             const routeFilter = ["/home", "/more"];
             return routeFilter.includes(path);
+        }
+    },
+    async beforeCreate() {
+        if (!getViewId()) {
+            await trackViewBehavior(1);
+            setViewId();
+            console.log("=>", "第一次访问,发送type1");
         }
     },
     mounted() {

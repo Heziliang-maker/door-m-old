@@ -54,7 +54,7 @@ service.interceptors.response.use(
       //返回错误类型
       // return Promise.reject(new Error(res.errorMsg || "Error"));
       //这里暂时不抛出错误
-      return res;
+      return Promise.reject(new Error(res.errorMsg || "Error"));
     }
   },
   (error) => {

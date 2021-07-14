@@ -14,6 +14,20 @@
     /> -->
     <link rel="icon" href="<%= BASE_URL %>favicon.png" />
     <title class="notranslate">Buykop</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-200232091-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-200232091-1");
+    </script>
     <style>
       html {
         width: 100%;
@@ -119,6 +133,16 @@
         continue.</strong
       >
     </noscript>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-P5NVCWW"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <div id="app"></div>
     <div
       id="google_translate_element"

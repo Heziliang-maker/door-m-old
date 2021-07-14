@@ -50,9 +50,12 @@ export function trackViewBehavior(type, id = null, origin = null) {
   });
 }
 
-export function queryPortalProducts() {
+export function queryPortalProducts(sort = null) {
   return request({
     url: "/portal/query_portals",
     method: "post",
+    data: {
+      sort,
+    },
   });
 }

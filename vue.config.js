@@ -8,8 +8,9 @@ module.exports = {
     open: true,
     proxy: {
       "^/shop-admin/v1": {
-        target: "http://106.15.62.70:17804/",
-        changOrigin: true,
+        // target: "http://106.15.62.70:17804/",
+        target: "http://139.196.185.17:17001/",
+        changeOrigin: true,
       },
     },
   },

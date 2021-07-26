@@ -24,7 +24,7 @@ import Footer from "@/layout/TheFooter";
 import Overlay from "@/components/Overlay";
 import cookie from "@/plugins/cookie";
 import { queryLanguage, queryLocalLanguage } from "@/api";
-import { trackViewBehavior } from "@/api/index";
+// import { trackViewBehavior } from "@/api/index";
 
 window.googleTranslateElementInit = () => {
     new google.translate.TranslateElement(
@@ -69,9 +69,9 @@ export default {
             return routeFilter.includes(path);
         }
     },
-    async beforeCreate() {
-        await trackViewBehavior(1);
-    },
+    // async beforeCreate() {
+    //     await trackViewBehavior(1);
+    // },
     mounted() {
         // 获取语言和汇率以及货币符号
         this.getCounryInfo();

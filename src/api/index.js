@@ -38,17 +38,17 @@ export function queryLocalLanguage() {
 }
 
 // 地区查询语言汇率
-export function trackViewBehavior(type, id = null, origin = null) {
-  return request({
-    url: "/analyze/portal/visit/view",
-    method: "post",
-    data: {
-      id: id,
-      origin: origin,
-      type: type,
-    },
-  });
-}
+// export function trackViewBehavior(type, id = null, origin = null) {
+//   return request({
+//     url: "/analyze/portal/visit/view",
+//     method: "post",
+//     data: {
+//       id: id,
+//       origin: origin,
+//       type: type,
+//     },
+//   });
+// }
 
 export function queryPortalProducts(sort = null) {
   return request({

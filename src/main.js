@@ -39,7 +39,7 @@ import "vant/lib/skeleton/style";
 import "vant/lib/icon/style";
 import "vant/lib/toast/style";
 
-import { trackViewBehavior } from "./api/index";
+// import { trackViewBehavior } from "./api/index";
 
 Vue.use(VanImage);
 Vue.use(Swipe);
@@ -64,7 +64,7 @@ Vue.use(VueClipboard);
 //过滤器
 Vue.filter("countFix", (val1, val2) => {
   //差价求和
-  return val1 ? "$"+val1.toFixed(2) : "";
+  return val1 ? "$" + val1.toFixed(2) : "";
 });
 Vue.filter("priceGroup", (val) => {
   //价格整数与小数分割
@@ -78,11 +78,11 @@ Vue.prototype.$toast = Toast;
 Vue.directive("jumpTo", function(el, binding) {
   let [url, type, id] = binding.value;
   el.onclick = function() {
-    const cb = async () => {
-      await trackViewBehavior(type, id);
-      window.open(url, "_blank");
-    };
-    cb();
+    // const cb = async () => {
+    // await trackViewBehavior(type, id);
+    window.open(url, "_blank");
+    // };
+    // cb();
   };
 });
 

@@ -15,6 +15,7 @@
 
 <script>
 import Grid from "@/components/Grid";
+import { queryPortalProducts } from "@/api";
 export default {
     name: "more",
     props: {
@@ -31,21 +32,22 @@ export default {
     components: {
         Grid
     },
-    created() {
-        console.log("=>", "created");
+    beforeCreate() {
+        this.$emit("ready", false);
     },
-    mounted() {
-        console.log("=>", "mounted");
-        this.init();
-        
+    created() {
+        this.initData();
     },
     methods: {
-        init() {
-            console.log("this.$route=>", this.$route);
-            const { query } = this.$route;
-            const { tabName, list } = query;
-            this.list = JSON.parse(list);
+        initData() {
+            const { tabName, classifyId } = this.$route.query;
             this.tabName = tabName;
+            queryPortalProducts(classifyId).then((res) => {
+                this.list = res.result[0].stringListMap[tabName];
+                this.$nextTick(() => {
+                    this.$emit("ready", true);
+                });
+            });
         }
     }
 };

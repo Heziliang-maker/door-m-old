@@ -21,6 +21,7 @@
       <p class="footer-bot-copyright">
         © 2021 I Midnight Sad Rose Limited All Rights Reserved I Be a visionary I Powered by Buykop
       </p>
+      <a href="https://beian.miit.gov.cn/#/Integrated/index">沪ICP备2020033164号-2</a>
     </div>
   </div>
 </template>
@@ -140,7 +141,7 @@ export default {
                 height: 100%;
             }
         }
-        &-copyright {
+        &-copyright,a {
             word-break: keep-all;
             width: 255px;
             text-align: center;

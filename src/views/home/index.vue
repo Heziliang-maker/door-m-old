@@ -27,8 +27,6 @@
     <div class="seemore" @click="handleSeemore">
       <div>more ></div>
     </div>
-    <!-- <div ref="btnForDiscount" class="discount_btn" @click="handleGetDiscount"><img src="@/assets/discount_btn.png"
-           alt="discount"></div> -->
   </div>
 </template>
 <script>
@@ -65,12 +63,12 @@ export default {
     created() {
         this.initData();
     },
-    mounted() {
-        // this.$refs.btnForDiscount.style.opacity = 1;
-    },
     computed: {
         curListForTab() {
             return this.cateMap[this.curTabName];
+        },
+        classifyId() {
+            return this.curListForTab[0].classifyId;
         }
     },
     methods: {
@@ -84,26 +82,20 @@ export default {
                 this.TabList = Object.keys(data.stringListMap);
                 this.curTabName = this.TabList[0]; //默认为第一项
                 this.cateMap = data.stringListMap;
-
                 this.$nextTick(() => {
                     this.$emit("ready", true);
                 });
             });
         },
         handleSeemore() {
-            console.log("=>", this.curTabName);
             this.$router.push({
                 path: "/more",
                 query: {
                     tabName: this.curTabName,
-                    list: JSON.stringify(this.curListForTab)
+                    classifyId: this.classifyId
                 }
             });
         },
-        handleGetDiscount() {
-            // this.showCard = true;
-            this.$emit("update:show", true);
-        }
     }
 };
 </script>

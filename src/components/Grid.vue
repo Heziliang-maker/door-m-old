@@ -21,7 +21,7 @@
             <!-- <span>
               ${{item.retailPrice.toString().split('.')[0]}}<a>{{item.retailPrice.toString().split('.').length>1?item.retailPrice.toString().split('.')[1]:''}}</a>
             </span> -->
-            <span class="origin" v-html="$options.filters.countFix(item.reamt,item.retailPrice)"></span>
+            <span class="origin" v-html="$options.filters.countFix(item.reamt)"></span>
           </div>
         </div>
       </van-grid-item>

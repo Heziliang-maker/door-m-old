@@ -64,7 +64,7 @@ Vue.use(VueClipboard);
 //过滤器
 Vue.filter("countFix", (val1, val2) => {
   //差价求和
-  return val1 ? "$" + ((val2 * 100 + val1 * 100) / 100).toFixed(2) : "";
+  return val1 ? "$"+val1.toFixed(2) : "";
 });
 Vue.filter("priceGroup", (val) => {
   //价格整数与小数分割

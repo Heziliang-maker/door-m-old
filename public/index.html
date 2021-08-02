@@ -31,17 +31,6 @@
         },
       });
     </script>
-    <script>
-      function decorateUrl(urlString) {
-        var ga = window[window["GoogleAnalyticsObject"]];
-        var tracker;
-        if (ga && typeof ga.getAll === "function") {
-          tracker = ga.getAll()[0]; // Uses the first tracker created on the page
-          urlString = new window.gaplugins.Linker(tracker).decorate(urlString);
-        }
-        return urlString;
-      }
-    </script>
     <!-- End Google Tag Manager -->
     <style>
       html {

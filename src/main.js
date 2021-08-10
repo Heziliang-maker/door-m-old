@@ -98,32 +98,40 @@ if (window.location.search) {
     });
 }
 
+const cb = ({ url, type, id, shopId }) => {
+  //渠道
+  trackViewBehavior(type, id, sessionStorage.getItem("channel") ?? null);
+  let openUrl = "";
+
+  if (shopId) {
+    ///如果url中自带参数则拼接到后面
+    const isParamsExist = ~url.indexOf("?");
+    const isChaneelExist = !!sessionStorage.getItem("channel");
+    openUrl += isParamsExist
+      ? isChaneelExist
+        ? `&origin=${sessionStorage.getItem("channel")}`
+        : ""
+      : isChaneelExist
+      ? `?origin=${sessionStorage.getItem("channel")}`
+      : "";
+  } else {
+    openUrl = decorateUrl(url);
+  }
+  window.open(openUrl, "_blank");
+};
+
 Vue.directive("jumpTo", function(el, binding) {
   const { url, type, id, shopId } = binding.value;
   el.onclick = function() {
-    const cb = async () => {
-      //渠道
-      trackViewBehavior(type, id, sessionStorage.getItem("channel") ?? null);
-      let openUrl = "";
-      if (shopId) {
-        ///如果url中自带参数则拼接到后面
-        const isParamsExist = ~url.indexOf("?");
-        const isChaneelExist = !!sessionStorage.getItem("channel");
-        openUrl += isParamsExist
-          ? isChaneelExist
-            ? `&origin=${sessionStorage.getItem("channel")}`
-            : ""
-          : isChaneelExist
-          ? `?origin=${sessionStorage.getItem("channel")}`
-          : "";
-      } else {
-        openUrl = decorateUrl(url);
-      }
-      window.open(openUrl, "_blank");
-    };
-    cb();
+    cb({ url, type, id, shopId });
   };
 });
+
+//防止刷新重复加访问量
+if (!sessionStorage.getItem("access")) {
+  cb({ type: 1 });
+  sessionStorage.setItem("access", true);
+}
 
 new Vue({
   router,

@@ -5,9 +5,7 @@
 <template>
   <div>
     <van-swipe class="my-swipe" :autoplay="1000" indicator-color="#000000">
-      <van-swipe-item class="swipe-item" v-for="(item,index) in list" :key="index" v-jumpTo=[item.advUrl,3]>
-        <img :src="item.img" alt="">
-      </van-swipe-item>
+      <van-swipe-item class="swipe-item" v-for="(item,index) in list" :key="index" </van-swipe-item>
     </van-swipe>
   </div>
 </template>

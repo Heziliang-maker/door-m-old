@@ -4,7 +4,7 @@ import request from "@/plugins/request";
 // 查询折扣
 export function queryDiscount() {
   return request({
-    url: "/portal/query_discount",
+    url: "/portals/query_discount",
     method: "post",
   });
 }
@@ -12,7 +12,7 @@ export function queryDiscount() {
 //用户订阅
 export function userSubscribe(data) {
   return request({
-    url: "/portal/send_discount_email",
+    url: "/portals/send_discount_email",
     method: "post",
     data,
   });
@@ -21,7 +21,7 @@ export function userSubscribe(data) {
 // 语言汇率转换
 export function queryLanguage(data) {
   return request({
-    url: "/portal/change_rate",
+    url: "/portals/change_rate",
     method: "post",
     data: {
       language: data,
@@ -32,13 +32,13 @@ export function queryLanguage(data) {
 // 地区查询语言汇率
 export function queryLocalLanguage() {
   return request({
-    url: "/portal/query_test",
+    url: "/portals/query_test",
     method: "get",
   });
 }
 
 // 地区查询语言汇率
-export function trackViewBehavior(type, id = null, origin = null) {
+export function trackViewBehavior(type, id = null, origin) {
   return request({
     url: "/analyze/portal/visit/view",
     method: "post",
@@ -52,7 +52,7 @@ export function trackViewBehavior(type, id = null, origin = null) {
 
 export function queryPortalProducts(sort = null) {
   return request({
-    url: "/portal/query_portals",
+    url: "/portals/query_portals",
     method: "post",
     data: {
       sort,

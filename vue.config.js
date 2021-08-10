@@ -9,7 +9,7 @@ module.exports = {
     proxy: {
       "^/shop-admin/v1": {
         target: "http://106.15.62.70:17804/",
-        changOrigin: true,
+        changeOrigin: true,
       },
     },
   },

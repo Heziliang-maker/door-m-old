@@ -64,7 +64,7 @@ Vue.use(VueClipboard);
 //过滤器
 Vue.filter("countFix", (val1, val2) => {
   //差价求和
-  return val1 ? "$"+val1.toFixed(2) : "";
+  return val1 ? "$" + val1.toFixed(2) : "";
 });
 Vue.filter("priceGroup", (val) => {
   //价格整数与小数分割
@@ -75,16 +75,63 @@ Vue.filter("priceGroup", (val) => {
 
 Vue.prototype.$toast = Toast;
 // 跳转
+function decorateUrl(urlString) {
+  var ga = window[window["GoogleAnalyticsObject"]];
+  var tracker;
+  if (ga && typeof ga.getAll === "function") {
+    tracker = ga.getAll()[0]; // Uses the first tracker created on the page
+    urlString = new window.gaplugins.Linker(tracker).decorate(urlString);
+  }
+  return urlString;
+}
+
+//获取推广渠道
+if (window.location.search) {
+  window.location.search
+    .slice(1)
+    .split("&")
+    .forEach((res) => {
+      console.log(res);
+      if (res.split("=")[0] == "origin") {
+        sessionStorage.setItem("channel", res.split("=")[1]);
+      }
+    });
+}
+
+const cb = ({ url, type, id, shopId }) => {
+  //渠道
+  trackViewBehavior(type, id, sessionStorage.getItem("channel") ?? null);
+  let openUrl = "";
+
+  if (shopId) {
+    ///如果url中自带参数则拼接到后面
+    const isParamsExist = ~url.indexOf("?");
+    const isChaneelExist = !!sessionStorage.getItem("channel");
+    openUrl += isParamsExist
+      ? isChaneelExist
+        ? `&origin=${sessionStorage.getItem("channel")}`
+        : ""
+      : isChaneelExist
+      ? `?origin=${sessionStorage.getItem("channel")}`
+      : "";
+  } else {
+    openUrl = decorateUrl(url);
+  }
+  window.open(openUrl, "_blank");
+};
+
 Vue.directive("jumpTo", function(el, binding) {
-  let [url, type, id] = binding.value;
+  const { url, type, id, shopId } = binding.value;
   el.onclick = function() {
-    const cb = async () => {
-      await trackViewBehavior(type, id);
-      window.open(url, "_blank");
-    };
-    cb();
+    cb({ url, type, id, shopId });
   };
 });
+
+//防止刷新重复加访问量
+if (!sessionStorage.getItem("access")) {
+  cb({ type: 1 });
+  sessionStorage.setItem("access", true);
+}
 
 new Vue({
   router,

@@ -86,6 +86,10 @@ export default {
                 this.originLang = cookieLang;
             }
         }, 500);
+        //监听页面关闭
+        window.addEventListener("beforeunload", () => this.beforeunloadHandler());
+        //监听系统退出时间开始计时
+        localStorage.setItem("viewTime", new Date().getTime());
     },
     methods: {
         ready(isReady) {
@@ -134,8 +138,8 @@ export default {
                 }
             }
         },
-        async beforeunloadHandler() {
-            await trackViewBehavior({
+        beforeunloadHandler() {
+            trackViewBehavior({
                 type: 7,
                 viewTime: new Date().getTime() - localStorage.getItem("viewTime")
             });
@@ -144,7 +148,7 @@ export default {
         }
     },
     destroyed() {
-        window.removeEventListener("beforeunload", (e) => this.beforeunloadHandler(e));
+        window.removeEventListener("beforeunload", () => this.beforeunloadHandler());
     }
 };
 </script>

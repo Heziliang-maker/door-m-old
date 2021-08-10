@@ -37,7 +37,6 @@ export function queryLocalLanguage() {
   });
 }
 
-// 地区查询语言汇率
 export function trackViewBehavior({ type, id, origin, viewTime }) {
   return request({
     url: "/analyze/portal/visit/view",

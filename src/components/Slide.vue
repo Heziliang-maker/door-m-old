@@ -4,7 +4,6 @@
 -->
 <template>
   <div class="slide">
-
     <div class="probox">
       <!-- item -->
       <div class="proitem clicks" v-for="(item,index) in list" :key="index" v-jumpTo=[item.productUrl,3]>

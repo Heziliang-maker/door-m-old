@@ -100,20 +100,25 @@ if (window.location.search) {
 
 const cb = ({ url, type, id, shopId }) => {
   //渠道
-  trackViewBehavior(type, id, sessionStorage.getItem("channel") ?? null);
+  trackViewBehavior({
+    type,
+    id,
+    origin: sessionStorage.getItem("channel") ?? null,
+  });
   let openUrl = "";
 
   if (shopId) {
     ///如果url中自带参数则拼接到后面
     const isParamsExist = ~url.indexOf("?");
     const isChaneelExist = !!sessionStorage.getItem("channel");
-    openUrl += isParamsExist
-      ? isChaneelExist
-        ? `&origin=${sessionStorage.getItem("channel")}`
-        : ""
-      : isChaneelExist
-      ? `?origin=${sessionStorage.getItem("channel")}`
-      : "";
+    openUrl =
+      url + isParamsExist
+        ? isChaneelExist
+          ? `&origin=${sessionStorage.getItem("channel")}`
+          : ""
+        : isChaneelExist
+        ? `?origin=${sessionStorage.getItem("channel")}`
+        : "";
   } else {
     openUrl = decorateUrl(url);
   }

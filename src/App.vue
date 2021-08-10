@@ -24,7 +24,7 @@ import Footer from "@/layout/TheFooter";
 import Overlay from "@/components/Overlay";
 import cookie from "@/plugins/cookie";
 import { queryLanguage, queryLocalLanguage } from "@/api";
-// import { trackViewBehavior } from "@/api/index";
+import { trackViewBehavior } from "@/api/index";
 
 window.googleTranslateElementInit = () => {
     new google.translate.TranslateElement(
@@ -133,7 +133,18 @@ export default {
                     this.overlayKey++;
                 }
             }
+        },
+        async beforeunloadHandler() {
+            await trackViewBehavior({
+                type: 7,
+                viewTime: new Date().getTime() - localStorage.getItem("viewTime")
+            });
+            //清除localstorage
+            localStorage.clear();
         }
+    },
+    destroyed() {
+        window.removeEventListener("beforeunload", (e) => this.beforeunloadHandler(e));
     }
 };
 </script>

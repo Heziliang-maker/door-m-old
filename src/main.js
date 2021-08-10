@@ -108,17 +108,16 @@ const cb = ({ url, type, id, shopId }) => {
   let openUrl = "";
 
   if (shopId) {
+    // console.log("=>", "yesyes...", shopId);
     ///如果url中自带参数则拼接到后面
     const isParamsExist = ~url.indexOf("?");
-    const isChaneelExist = !!sessionStorage.getItem("channel");
-    openUrl =
-      url + isParamsExist
-        ? isChaneelExist
-          ? `&origin=${sessionStorage.getItem("channel")}`
-          : ""
-        : isChaneelExist
-        ? `?origin=${sessionStorage.getItem("channel")}`
-        : "";
+    const channel = sessionStorage.getItem("channel");
+    if (isParamsExist) {
+      openUrl = url + (channel ? "&origin=" + channel : "");
+    } else {
+      openUrl = url + (channel ? "?origin=" + channel : "");
+    }
+    // console.log("=>", "yesyes...", openUrl);
   } else {
     openUrl = decorateUrl(url);
   }
@@ -127,6 +126,7 @@ const cb = ({ url, type, id, shopId }) => {
 
 Vue.directive("jumpTo", function(el, binding) {
   const { url, type, id, shopId } = binding.value;
+  if (shopId) console.log("shopId=>", binding.value);
   el.onclick = function() {
     cb({ url, type, id, shopId });
   };

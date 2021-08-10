@@ -5,7 +5,8 @@
 <template>
   <div>
     <van-grid :center="false" :border="false" :column-num="2" v-if="list.length">
-      <van-grid-item v-for="(item,index) in list" :key="index" v-jumpTo={url:item.productUrl,type:2,id:item.id}>
+      <van-grid-item v-for="(item,index) in list" :key="index"
+                     v-jumpTo={url:item.productUrl,type:2,id:item.id,shopId:item.shopId,}>
         <div class="grid-list-item">
           <div class="item-pic">
             <img :src="item.productImg" alt="">

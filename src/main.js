@@ -75,14 +75,23 @@ Vue.filter("priceGroup", (val) => {
 
 Vue.prototype.$toast = Toast;
 // 跳转
+function decorateUrl(urlString) {
+  var ga = window[window["GoogleAnalyticsObject"]];
+  var tracker;
+  if (ga && typeof ga.getAll === "function") {
+    tracker = ga.getAll()[0]; // Uses the first tracker created on the page
+    urlString = new window.gaplugins.Linker(tracker).decorate(urlString);
+  }
+  return urlString;
+}
 Vue.directive("jumpTo", function(el, binding) {
   let [url, type, id] = binding.value;
   el.onclick = function() {
-    // const cb = async () => {
-    // await trackViewBehavior(type, id);
-    window.open(url, "_blank");
-    // };
-    // cb();
+    const cb = async () => {
+      await trackViewBehavior(type, id);
+      window.open(decorateUrl(url), "_blank");
+    };
+    cb();
   };
 });
 

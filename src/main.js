@@ -39,7 +39,7 @@ import "vant/lib/skeleton/style";
 import "vant/lib/icon/style";
 import "vant/lib/toast/style";
 
-// import { trackViewBehavior } from "./api/index";
+import { trackViewBehavior } from "./api/index";
 
 Vue.use(VanImage);
 Vue.use(Swipe);
@@ -84,12 +84,42 @@ function decorateUrl(urlString) {
   }
   return urlString;
 }
+
+//获取推广渠道
+if (window.location.search) {
+  window.location.search
+    .slice(1)
+    .split("&")
+    .forEach((res) => {
+      console.log(res);
+      if (res.split("=")[0] == "origin") {
+        sessionStorage.setItem("channel", res.split("=")[1]);
+      }
+    });
+}
+
 Vue.directive("jumpTo", function(el, binding) {
-  let [url, type, id] = binding.value;
+  const { url, type, id, shopId } = binding.value;
   el.onclick = function() {
     const cb = async () => {
-      await trackViewBehavior(type, id);
-      window.open(decorateUrl(url), "_blank");
+      //渠道
+      trackViewBehavior(type, id, sessionStorage.getItem("channel") ?? null);
+      let openUrl = "";
+      if (shopId) {
+        ///如果url中自带参数则拼接到后面
+        const isParamsExist = ~url.indexOf("?");
+        const isChaneelExist = !!sessionStorage.getItem("channel");
+        openUrl += isParamsExist
+          ? isChaneelExist
+            ? `&origin=${sessionStorage.getItem("channel")}`
+            : ""
+          : isChaneelExist
+          ? `?origin=${sessionStorage.getItem("channel")}`
+          : "";
+      } else {
+        openUrl = decorateUrl(url);
+      }
+      window.open(openUrl, "_blank");
     };
     cb();
   };

@@ -4,7 +4,7 @@ import request from "@/plugins/request";
 // 查询折扣
 export function queryDiscount() {
   return request({
-    url: "/portals/query_discount",
+    url: "/portal/query_discount",
     method: "post",
   });
 }
@@ -12,7 +12,7 @@ export function queryDiscount() {
 //用户订阅
 export function userSubscribe(data) {
   return request({
-    url: "/portals/send_discount_email",
+    url: "/portal/send_discount_email",
     method: "post",
     data,
   });

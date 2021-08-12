@@ -9,7 +9,12 @@
                      v-jumpTo={url:item.productUrl,type:2,id:item.id,shopId:item.shopId,}>
         <div class="grid-list-item">
           <div class="item-pic">
-            <img :src="item.productImg" alt="">
+            <van-image width="158px" height="158px" :src="item.productImg" fit="cover">
+              <template v-slot:loading>
+                <van-loading type="spinner" size="20" />
+              </template>
+            </van-image>
+            <!-- <img :src="item.productImg" alt=""> -->
           </div>
           <div class="item-desc" v-html="item.productName">
           </div>
@@ -51,15 +56,10 @@ export default {
     margin: 0 auto;
     .van-grid-item {
         .item-pic {
-            width: 158px;
-            height: 158px;
+            
             overflow: hidden;
 
             margin-bottom: 5px;
-            img {
-                width: 100%;
-                height: 100%;
-            }
         }
         .item-desc {
             flex: 0 0 158px;

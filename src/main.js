@@ -134,7 +134,7 @@ Vue.directive("jumpTo", function(el, binding) {
 
 //防止刷新重复加访问量
 if (!sessionStorage.getItem("access")) {
-  cb({ type: 1 });
+  trackViewBehavior({ type: 1 });
   sessionStorage.setItem("access", true);
 }
 

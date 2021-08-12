@@ -4,7 +4,7 @@
 -->
 <template>
   <div>
-    <van-grid :center="false" :border="false" :column-num="2" v-if="list.length">
+    <van-grid :center="false" :border="false" :column-num="2">
       <van-grid-item v-for="(item,index) in list" :key="index"
                      v-jumpTo={url:item.productUrl,type:2,id:item.id,shopId:item.shopId,}>
         <div class="grid-list-item">
@@ -56,7 +56,6 @@ export default {
     margin: 0 auto;
     .van-grid-item {
         .item-pic {
-            
             overflow: hidden;
 
             margin-bottom: 5px;

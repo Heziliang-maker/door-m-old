@@ -70,10 +70,7 @@ export default {
         }
     },
     mounted() {
-        // 存时间
-        if (!sessionStorage.getItem("viewTime")) {
-            sessionStorage.setItem("viewTime", Date.now());
-        }
+      
         // 获取语言和汇率以及货币符号
         this.getCounryInfo();
         // 轮询

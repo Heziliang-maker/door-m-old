@@ -84,19 +84,77 @@ function decorateUrl(urlString) {
   }
   return urlString;
 }
-
+console.log('=>','.....')
+// pagehide
 window.addEventListener("blur", async function() {
-  await trackViewBehavior({
-    type: 7,
-    viewTime: Date.now() - +sessionStorage.getItem("viewTime"),
-  });
-  console.log("耗时=>", Date.now() - +sessionStorage.getItem("viewTime"));
+  if (sessionStorage.getItem("viewTime")) {
+    await trackViewBehavior({
+      type: 7,
+      viewTime: Date.now() - +sessionStorage.getItem("viewTime"),
+    });
+  }
   //清除
   sessionStorage.removeItem("viewTime");
-  sessionStorage.setItem("access", false);
+  //   console.log("=>", "blur");
+  console.log("blur=>", Date.now());
 });
 
-console.log("=>", "11111111111111111111111");
+function getQueryVariable(query, variable) {
+  let vars = query.split("?");
+  for (let i = 0; i < vars.length; i++) {
+    let pair = vars[i].split("=");
+    if (pair[0] == variable) {
+      return pair[1];
+    }
+  }
+  return false;
+}
+
+// pagefocus
+window.addEventListener("focus", async function() {
+  console.log("focus=>", Date.now());
+  if (!sessionStorage.getItem("viewTime")) {
+    sessionStorage.setItem("viewTime", Date.now());
+    // getQueryVariable
+    let origin = getQueryVariable(window.location.href, "origin");
+    if (origin) sessionStorage.setItem("channel", origin);
+    trackViewBehavior({ type: 1, origin: origin });
+  }
+});
+// 各种浏览器兼容
+var hidden, state, visibilityChange;
+if (typeof document.hidden !== "undefined") {
+  hidden = "hidden";
+  visibilityChange = "visibilitychange";
+  state = "visibilityState";
+} else if (typeof document.mozHidden !== "undefined") {
+  hidden = "mozHidden";
+  visibilityChange = "mozvisibilitychange";
+  state = "mozVisibilityState";
+} else if (typeof document.msHidden !== "undefined") {
+  hidden = "msHidden";
+  visibilityChange = "msvisibilitychange";
+  state = "msVisibilityState";
+} else if (typeof document.webkitHidden !== "undefined") {
+  hidden = "webkitHidden";
+  visibilityChange = "webkitvisibilitychange";
+  state = "webkitVisibilityState";
+}
+// 添加监听器，在title里显示状态变化
+document.addEventListener(
+  visibilityChange,
+  function() {
+    document.title = document[state];
+    if (document[state] === "hidden") {
+      console.log("=>", "我消失");
+    } else {
+      console.log("=>", "我出现");
+    }
+  },
+  false
+);
+// 初始化
+document.title = document[state];
 
 const cb = ({ url, type, id, shopId }) => {
   //渠道

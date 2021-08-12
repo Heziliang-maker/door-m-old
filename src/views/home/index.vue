@@ -61,14 +61,6 @@ export default {
         this.$emit("ready", false);
     },
     mounted() {
-        const { origin } = this.$route.query;
-        if (origin) sessionStorage.setItem("channel", origin);
-
-        if (!sessionStorage.getItem("access")) {
-            trackViewBehavior({ type: 1, origin: sessionStorage.getItem("channel") });
-            sessionStorage.setItem("access", true);
-        }
-
         this.initData();
     },
     computed: {

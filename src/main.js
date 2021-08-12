@@ -85,19 +85,6 @@ function decorateUrl(urlString) {
   return urlString;
 }
 
-//获取推广渠道
-if (window.location.search) {
-  window.location.search
-    .slice(1)
-    .split("&")
-    .forEach((res) => {
-      console.log(res);
-      if (res.split("=")[0] == "origin") {
-        sessionStorage.setItem("channel", res.split("=")[1]);
-      }
-    });
-}
-
 const cb = ({ url, type, id, shopId }) => {
   //渠道
   trackViewBehavior({
@@ -132,11 +119,15 @@ Vue.directive("jumpTo", function(el, binding) {
   };
 });
 
-//防止刷新重复加访问量
-if (!sessionStorage.getItem("access")) {
-  trackViewBehavior({ type: 1 });
-  sessionStorage.setItem("access", true);
-}
+window.οnbefοreunlοad = function() {
+  trackViewBehavior({
+    type: 7,
+    viewTime: Date.now() - +sessionStorage.getItem("viewTime"),
+  });
+  //清除localstorage
+  localStorage.clear();
+};
+
 
 new Vue({
   router,

@@ -33,7 +33,7 @@
 import Swiper from "@/components/Swiper";
 import Slider from "@/components/Slide";
 import Grid from "@/components/Grid";
-
+import { trackViewBehavior } from "@/api/index";
 import { queryPortalProducts } from "@/api";
 export default {
     name: "home",
@@ -61,6 +61,20 @@ export default {
         this.$emit("ready", false);
     },
     created() {
+        const { origin } = this.$route.query;
+        // console.log("origin=>", origin);
+        sessionStorage.setItem("channel", origin);
+        // //防止刷新重复加访问量
+        // if (!sessionStorage.getItem("access")) {
+        //     trackViewBehavior({ type: 1, origin: sessionStorage.getItem("channel") });
+        //     sessionStorage.setItem("access", true);
+        // }
+        sessionStorage.setItem("viewTime", Date.now());
+        if (!sessionStorage.getItem("access")) {
+            trackViewBehavior({ type: 1, origin: sessionStorage.getItem("channel") });
+            sessionStorage.setItem("access", true);
+        }
+
         this.initData();
     },
     computed: {
@@ -95,7 +109,7 @@ export default {
                     classifyId: this.classifyId
                 }
             });
-        },
+        }
     }
 };
 </script>

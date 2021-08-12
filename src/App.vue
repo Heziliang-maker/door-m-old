@@ -69,9 +69,6 @@ export default {
             return routeFilter.includes(path);
         }
     },
-    // async beforeCreate() {
-    //     await trackViewBehavior(1);
-    // },
     mounted() {
         // 获取语言和汇率以及货币符号
         this.getCounryInfo();
@@ -87,9 +84,9 @@ export default {
             }
         }, 500);
         //监听页面关闭
-        window.addEventListener("beforeunload", () => this.beforeunloadHandler());
+        // window.addEventListener("beforeunload", e => this.beforeunloadHandler(e));
         //监听系统退出时间开始计时
-        sessionStorage.setItem("viewTime", Date.now());
+       
     },
     methods: {
         ready(isReady) {
@@ -138,17 +135,7 @@ export default {
                 }
             }
         },
-        beforeunloadHandler() {
-            trackViewBehavior({
-                type: 7,
-                viewTime: Date.now() - +sessionStorage.getItem("viewTime")
-            });
-            //清除localstorage
-            localStorage.clear();
-        }
-    },
-    beforeDestroy() {
-        window.removeEventListener("beforeunload", () => this.beforeunloadHandler());
+      
     }
 };
 </script>

@@ -12,7 +12,7 @@
           <img src="@/assets/info_total.png" alt="">
         </div>
         <p class="info-deadline">
-          The deadline is August 8, 2021
+          The deadline is October 8, 2021
         </p>
         <div class="email-btn">
           <input v-model="email" placeholder="Email Address" type="text" @keyup.enter="handleSubscribe">

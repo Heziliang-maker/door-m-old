@@ -85,6 +85,19 @@ function decorateUrl(urlString) {
   return urlString;
 }
 
+window.addEventListener("blur", async function() {
+  await trackViewBehavior({
+    type: 7,
+    viewTime: Date.now() - +sessionStorage.getItem("viewTime"),
+  });
+  console.log("耗时=>", Date.now() - +sessionStorage.getItem("viewTime"));
+  //清除
+  sessionStorage.removeItem("viewTime");
+  sessionStorage.setItem("access", false);
+});
+
+console.log("=>", "11111111111111111111111");
+
 const cb = ({ url, type, id, shopId }) => {
   //渠道
   trackViewBehavior({
@@ -113,21 +126,11 @@ const cb = ({ url, type, id, shopId }) => {
 
 Vue.directive("jumpTo", function(el, binding) {
   const { url, type, id, shopId } = binding.value;
-  if (shopId) console.log("shopId=>", binding.value);
+
   el.onclick = function() {
     cb({ url, type, id, shopId });
   };
 });
-
-window.οnbefοreunlοad = function() {
-  trackViewBehavior({
-    type: 7,
-    viewTime: Date.now() - +sessionStorage.getItem("viewTime"),
-  });
-  //清除localstorage
-  localStorage.clear();
-};
-
 
 new Vue({
   router,

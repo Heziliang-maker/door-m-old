@@ -70,6 +70,10 @@ export default {
         }
     },
     mounted() {
+        // 存时间
+        if (!sessionStorage.getItem("viewTime")) {
+            sessionStorage.setItem("viewTime", Date.now());
+        }
         // 获取语言和汇率以及货币符号
         this.getCounryInfo();
         // 轮询
@@ -84,9 +88,6 @@ export default {
             }
         }, 500);
         //监听页面关闭
-        // window.addEventListener("beforeunload", e => this.beforeunloadHandler(e));
-        //监听系统退出时间开始计时
-       
     },
     methods: {
         ready(isReady) {
@@ -134,8 +135,7 @@ export default {
                     this.overlayKey++;
                 }
             }
-        },
-      
+        }
     }
 };
 </script>

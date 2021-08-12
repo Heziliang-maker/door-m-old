@@ -60,16 +60,10 @@ export default {
     beforeCreate() {
         this.$emit("ready", false);
     },
-    created() {
+    mounted() {
         const { origin } = this.$route.query;
-        // console.log("origin=>", origin);
-        sessionStorage.setItem("channel", origin);
-        // //防止刷新重复加访问量
-        // if (!sessionStorage.getItem("access")) {
-        //     trackViewBehavior({ type: 1, origin: sessionStorage.getItem("channel") });
-        //     sessionStorage.setItem("access", true);
-        // }
-        sessionStorage.setItem("viewTime", Date.now());
+        if (origin) sessionStorage.setItem("channel", origin);
+
         if (!sessionStorage.getItem("access")) {
             trackViewBehavior({ type: 1, origin: sessionStorage.getItem("channel") });
             sessionStorage.setItem("access", true);

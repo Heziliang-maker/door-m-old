@@ -89,7 +89,7 @@ export default {
         //监听页面关闭
         window.addEventListener("beforeunload", () => this.beforeunloadHandler());
         //监听系统退出时间开始计时
-        localStorage.setItem("viewTime", new Date().getTime());
+        sessionStorage.setItem("viewTime", Date.now());
     },
     methods: {
         ready(isReady) {
@@ -141,13 +141,13 @@ export default {
         beforeunloadHandler() {
             trackViewBehavior({
                 type: 7,
-                viewTime: new Date().getTime() - localStorage.getItem("viewTime")
+                viewTime: Date.now() - +sessionStorage.getItem("viewTime")
             });
             //清除localstorage
             localStorage.clear();
         }
     },
-    destroyed() {
+    beforeDestroy() {
         window.removeEventListener("beforeunload", () => this.beforeunloadHandler());
     }
 };

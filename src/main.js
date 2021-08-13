@@ -119,10 +119,10 @@ async function doLeave() {
   if (sessionStorage.getItem("viewTime")) {
     const totalTime = Date.now() - +sessionStorage.getItem("viewTime");
     console.log("=>", "浏览时长", `浏览了${totalTime / 1000}秒`);
-    记录浏览时长
     await trackViewBehavior({
       type: 7,
       viewTime: totalTime,
+      origin: sessionStorage.getItem("channel"),
     });
     //清除
     sessionStorage.removeItem("viewTime");
@@ -166,7 +166,7 @@ const cb = ({ url, type, id, shopId }) => {
   trackViewBehavior({
     type,
     id,
-    origin: sessionStorage.getItem("channel") ?? null,
+    origin: sessionStorage.getItem("channel"),
   });
   let openUrl = "";
 
@@ -175,6 +175,7 @@ const cb = ({ url, type, id, shopId }) => {
     ///如果url中自带参数则拼接到后面
     const isParamsExist = ~url.indexOf("?");
     const channel = sessionStorage.getItem("channel");
+
     if (isParamsExist) {
       openUrl = url + (channel ? "&origin=" + channel : "");
     } else {

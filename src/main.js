@@ -74,7 +74,8 @@ Vue.filter("priceGroup", (val) => {
 });
 
 Vue.prototype.$toast = Toast;
-// 跳转
+
+// 谷歌数据采集方法
 function decorateUrl(urlString) {
   var ga = window[window["GoogleAnalyticsObject"]];
   var tracker;
@@ -84,20 +85,8 @@ function decorateUrl(urlString) {
   }
   return urlString;
 }
-console.log('=>','.....')
-// pagehide
-window.addEventListener("blur", async function() {
-  if (sessionStorage.getItem("viewTime")) {
-    await trackViewBehavior({
-      type: 7,
-      viewTime: Date.now() - +sessionStorage.getItem("viewTime"),
-    });
-  }
-  //清除
-  sessionStorage.removeItem("viewTime");
-  //   console.log("=>", "blur");
-  console.log("blur=>", Date.now());
-});
+
+// 获取query参数
 
 function getQueryVariable(query, variable) {
   let vars = query.split("?");
@@ -110,17 +99,35 @@ function getQueryVariable(query, variable) {
   return false;
 }
 
-// pagefocus
-window.addEventListener("focus", async function() {
-  console.log("focus=>", Date.now());
+// 首次进入页面
+if (sessionStorage.getItem("access") !== true) {
+  console.log("=>", "首次进入页面");
+  // 首次进入页面
+  const origin = getQueryVariable(window.location.href, "origin");
+  if (origin) sessionStorage.setItem("channel", origin);
+  trackViewBehavior({ type: 1, origin: origin });
+  sessionStorage.setItem("access", true);
+}
+function doEnter() {
+  console.log("=>", "进入页面");
   if (!sessionStorage.getItem("viewTime")) {
     sessionStorage.setItem("viewTime", Date.now());
-    // getQueryVariable
-    let origin = getQueryVariable(window.location.href, "origin");
-    if (origin) sessionStorage.setItem("channel", origin);
-    trackViewBehavior({ type: 1, origin: origin });
   }
-});
+}
+async function doLeave() {
+  console.log("=>", "离开页面");
+  if (sessionStorage.getItem("viewTime")) {
+    const totalTime = Date.now() - +sessionStorage.getItem("viewTime");
+    console.log("=>", "浏览时长", `浏览了${totalTime / 1000}秒`);
+    记录浏览时长
+    await trackViewBehavior({
+      type: 7,
+      viewTime: totalTime,
+    });
+    //清除
+    sessionStorage.removeItem("viewTime");
+  }
+}
 // 各种浏览器兼容
 var hidden, state, visibilityChange;
 if (typeof document.hidden !== "undefined") {
@@ -146,15 +153,13 @@ document.addEventListener(
   function() {
     document.title = document[state];
     if (document[state] === "hidden") {
-      console.log("=>", "我消失");
+      doLeave();
     } else {
-      console.log("=>", "我出现");
+      doEnter();
     }
   },
   false
 );
-// 初始化
-document.title = document[state];
 
 const cb = ({ url, type, id, shopId }) => {
   //渠道

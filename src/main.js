@@ -102,6 +102,9 @@ function getQueryVariable(query, variable) {
 // 首次进入页面
 if (sessionStorage.getItem("access") !== true) {
   console.log("=>", "首次进入页面");
+  if (!sessionStorage.getItem("viewTime")) {
+    sessionStorage.setItem("viewTime", Date.now());
+  }
   // 首次进入页面
   const origin = getQueryVariable(window.location.href, "origin");
   if (origin) sessionStorage.setItem("channel", origin);

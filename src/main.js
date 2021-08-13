@@ -100,17 +100,19 @@ function getQueryVariable(query, variable) {
 }
 
 // 首次进入页面
-if (sessionStorage.getItem("access") !== true) {
-  console.log("=>", "首次进入页面");
-  if (!sessionStorage.getItem("viewTime")) {
-    sessionStorage.setItem("viewTime", Date.now());
-  }
-  // 首次进入页面
-  const origin = getQueryVariable(window.location.href, "origin");
-  if (origin) sessionStorage.setItem("channel", origin);
-  trackViewBehavior({ type: 1, origin: origin });
-  sessionStorage.setItem("access", true);
+// if (sessionStorage.getItem("access") !== true) {
+console.log("=>", "首次进入页面");
+if (!sessionStorage.getItem("viewTime")) {
+  sessionStorage.setItem("viewTime", Date.now());
 }
+// 首次进入页面
+const origin = getQueryVariable(window.location.href, "origin");
+if (origin) {
+  sessionStorage.setItem("channel", origin);
+  trackViewBehavior({ type: 1, origin: origin });
+}
+// sessionStorage.setItem("access", true);
+// }
 function doEnter() {
   console.log("=>", "进入页面");
   if (!sessionStorage.getItem("viewTime")) {
@@ -119,7 +121,7 @@ function doEnter() {
 }
 async function doLeave() {
   console.log("=>", "离开页面");
-  if (sessionStorage.getItem("viewTime")) {
+  if (sessionStorage.getItem("viewTime") && sessionStorage.getItem("channel")) {
     const totalTime = Date.now() - +sessionStorage.getItem("viewTime");
     console.log("=>", "浏览时长", `浏览了${totalTime / 1000}秒`);
     await trackViewBehavior({
@@ -154,7 +156,7 @@ if (typeof document.hidden !== "undefined") {
 document.addEventListener(
   visibilityChange,
   function() {
-    document.title = document[state];
+    // document.title = document[state];
     if (document[state] === "hidden") {
       doLeave();
     } else {

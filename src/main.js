@@ -106,7 +106,7 @@ if (!sessionStorage.getItem("viewTime")) {
   sessionStorage.setItem("viewTime", Date.now());
 }
 // 首次进入页面
-const origin = getQueryVariable(window.location.href, "origin");
+const origin = getQueryVariable(window.location.search, "origin");
 if (origin) {
   sessionStorage.setItem("channel", origin);
   trackViewBehavior({ type: 1, origin: origin });

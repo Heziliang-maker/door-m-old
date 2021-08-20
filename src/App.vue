@@ -14,7 +14,7 @@
     </transition>
     <transition name="van-slide-right">
       <div v-show="isProductPage" ref="btnForDiscount" class="discount_btn" @click="handleGetDiscount"><img
-             src="@/assets/discount_btn.png" alt="discount"></div>
+             src="@/assets/dialog_btn.png" alt="discount"></div>
     </transition>
   </div>
 </template>
@@ -51,7 +51,7 @@ export default {
     data() {
         return {
             isReady: false,
-            showCard: false,
+            showCard: true,
             // 货币符号
             // ccy: "",
             ccy: "€",
@@ -181,14 +181,13 @@ export default {
 }
 .discount_btn {
     position: fixed;
-    right: 21px;
-    bottom: 29px;
+    right: 15px;
+    bottom: 50px;
     transition: opacity 0.4s linear;
     transition-delay: 0.3s;
     z-index: 99;
     img {
-        width: 77px;
-        height: 77px;
+      width: 102px;
     }
 }
 </style>

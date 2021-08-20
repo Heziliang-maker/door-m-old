@@ -10,11 +10,13 @@ export function queryDiscount() {
 }
 
 //用户订阅
-export function userSubscribe(data) {
+export function userSubscribe(emailAddress) {
   return request({
-    url: "/portal/send_discount_email",
+    url: "/portal/subscription",
     method: "post",
-    data,
+    data: {
+      emailAddress,
+    },
   });
 }
 

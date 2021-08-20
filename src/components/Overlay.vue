@@ -1,43 +1,59 @@
 <template>
   <div id="overlay" @click.self="$emit('update:show',false)" class="notranslate">
     <div class="dialog">
-      <div class="header">
-        <van-icon name="cross" @click.self="$emit('update:show',false)" />
-      </div>
-      <div class="main-1" v-if="step===1">
-        <div class="title">
-          $5- $50 cash coupons at branded factory outlets, discounts for the first 500.
+      <div class="dialog-wrapper">
+
+        <div class="header">
+          <div>
+            <van-icon name="cross" @click.self="$emit('update:show',false)" />
+          </div>
         </div>
-        <div class="info-total">
-          <img src="@/assets/info_total.png" alt="">
+        <div class="main-1" v-show="step===1">
+          <div class="title">
+            <p>Hey , friend ! </p>
+            <p>We've got a gift for you ! Just Subscribe here !!!</p>
+            <p>Limited to the top 20 everyday.</p>
+          </div>
+          <div class="info-total">
+            <img src="@/assets/info_total.png" alt="">
+          </div>
+          <div class="email-btn">
+            <input v-model="email" placeholder="Email Address" type="text" @keyup.enter="handleSubscribe">
+          </div>
+          <van-button class="subscribe-btn" :loading="iconLoading" type="primary" loading-type="spinner"
+                      @click="handleSubscribe">
+            Subscribe
+          </van-button>
+          <!-- <div class="subscribe-btn" @click="handleSubscribe">Subscribe</div> -->
         </div>
-        <p class="info-deadline">
-          The deadline is October 8, 2021
-        </p>
-        <div class="email-btn">
-          <input v-model="email" placeholder="Email Address" type="text" @keyup.enter="handleSubscribe">
-        </div>
-        <div class="subscribe-btn" @click="handleSubscribe">Subscribe</div>
-      </div>
-      <div class="main-2" v-else>
-        <div class="title">
-          Thank you ! Here’s your code :
-        </div>
-        <div class="list">
-          <ul>
-            <!-- 1 -->
-            <li class="list-item" v-for="(dis,index) in disCountList" :key="index">
-              <p class="list-item-desc">{{dis.discountDescribe}}</p>
-              <div class="list-item-content">
-                <div>
-                  {{dis.discountCode}}
-                </div>
-                <div v-clipboard:copy="dis.discountCode" v-clipboard:success="onCopy" v-clipboard:error="onError">COPY
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
+        <transition name="van-slide-right">
+
+          <div class="main-2" v-show="step === 2">
+            <div class="title">
+              Successfully subscribed ~
+            </div>
+            <p class="info">You will receive special offers and the first opportunity to obtain new products!</p>
+            <p class="info">Please leave a note about the gift you want on your order page.</p>
+            <div class="list">
+              <ul>
+                <!-- 1 -->
+                <li class="list-item">
+                  <div class="list-item-main">
+                    <img src="@/assets/gift1.png" alt="">
+                  </div>
+
+                  <div class="list-item-tag">Fishnet Bodystocking</div>
+                </li>
+                <li class="list-item">
+                  <div class="list-item-main">
+                    <img src="@/assets/gift2.png" alt="">
+                  </div>
+                  <div class="list-item-tag">Portable Fan</div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </transition>
       </div>
     </div>
   </div>
@@ -56,25 +72,24 @@ export default {
         return {
             email: "",
             step: 1,
-            disCountList: []
+            iconLoading: false
         };
     },
-    async mounted() {
-        let { result } = await queryDiscount();
-        this.disCountList = result;
-    },
+    async mounted() {},
     methods: {
         async handleSubscribe() {
             if (this.email) {
                 // discountType不传
-                let queryData = this.disCountList.map(({ discountType, ...m }) => {
-                    return {
-                        ...m,
-                        emailAddress: this.email
-                    };
-                });
-                let res = await userSubscribe(queryData);
+                // let queryData = this.disCountList.map(({ discountType, ...m }) => {
+                //     return {
+                //         ...m,
+                //         emailAddress: this.email
+                //     };
+                // });
+                this.iconLoading = true;
+                let res = await userSubscribe(this.email);
                 if (res.status === "success") {
+                    this.iconLoading = false;
                     this.$toast("Successfully subscribed");
                     this.step = 2;
                 } else {
@@ -84,7 +99,7 @@ export default {
                 this.$toast("Fill in your email and subscribe");
             }
         },
-       
+
         onCopy() {
             this.$toast("Successfully copied");
         },
@@ -96,6 +111,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+ul,
+li,
+div,
+p,
+img {
+    // outline: 1px solid #00cec9;
+}
 #overlay {
     position: fixed;
     top: 0;
@@ -108,24 +130,42 @@ export default {
     align-items: center;
     z-index: 2000;
 }
-// 遮罩层-内容
 .dialog {
+    position: relative;
     width: 336px;
+    height: 445px;
+}
+// 遮罩层-内容
+.dialog-wrapper {
+    width: 100%;
+    height: 100%;
     border-radius: 4px;
-
     padding-bottom: 50px;
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
     background: url("~@/assets/card_bg.png") no-repeat right;
     background-color: #ffffff;
     background-size: contain;
+    padding-top: 40px;
 
     .header {
-        padding: 12px 0;
+        position: absolute;
+        top: 12px;
+        width: 100%;
+
+        box-sizing: border-box;
         text-align: right;
+
+        > div {
+            font-size: 0;
+            margin-right: 12px;
+        }
         .van-icon {
-            width: 12px;
-            height: 12px;
-            margin-right: 20px;
+            font-size: 16px;
+        }
+        .van-icon::before {
+            // width: 12px;
+            // height: 12px;
+            // margin-right: 12px;
         }
     }
     .main-1 {
@@ -148,8 +188,8 @@ export default {
         }
         .info-total {
             img {
-                width: 202px;
-                height: 104px;
+                width: 336px;
+                height: auto;
             }
         }
         .info-deadline {
@@ -170,7 +210,7 @@ export default {
         }
         .email-btn {
             width: 100%;
-            border: 1px solid #d8d8d8;
+            border: 1Px solid #d8d8d8;
             font-size: 16px;
             font-family: Montserrat-Light, Montserrat;
             font-weight: 300;
@@ -204,6 +244,8 @@ export default {
     }
     .main-2 {
         width: 100%;
+        max-height: 380px;
+        overflow: auto;
         box-sizing: border-box;
         padding: 0 28px;
         display: flex;
@@ -214,8 +256,17 @@ export default {
         .title {
             font-size: 16px;
             font-family: Montserrat-Light, Montserrat;
+            font-weight: 400;
+            color: #333333;
+            margin-bottom: 10px;
+        }
+        .info {
+            font-size: 12px;
+            font-family: Montserrat-Light, Montserrat;
             font-weight: 300;
             color: #333333;
+            line-height: 18px;
+            text-align: center;
         }
         .list {
             width: 100%;
@@ -225,49 +276,66 @@ export default {
                 width: 100%;
                 padding-bottom: 3px;
                 li.list-item {
+                    margin: auto;
                     &:not(:last-of-type) {
-                        margin-bottom: 20px;
-                    }
-
-                    p {
-                        font-size: 12px;
-                        font-family: Montserrat-Light, Montserrat;
-                        font-weight: 300;
-                        color: #000000;
                         margin-bottom: 10px;
                     }
-                    div.list-item-content {
-                        width: 100%;
-                        display: flex;
-                        justify-content: space-between;
+                    position: relative;
+                    width: 180px;
+                    border-radius: 1px;
 
-                        & > div {
-                            height: 40px;
-                            line-height: 40px;
-                            text-align: center;
-                        }
-                        & > div:nth-of-type(1) {
-                            width: 180px;
-                            border: 1px dashed #c1bebe;
-                            font-size: 14px;
-                            font-family: PingFangSC-Regular, PingFang SC;
-                            font-weight: 400;
-                            color: #333333;
-                            overflow: hidden;
-                            white-space: nowrap;
-                            text-overflow: ellipsis;
-                        }
-                        & > div:nth-of-type(2) {
-                            width: 86px;
-                            background: #162d75;
-                            border-radius: 2px;
+                    border: 1Px solid #f6236c;
+                    box-sizing: border-box;
+                    font-size: 0;
+                    .list-item-main {
+                        padding: 24px 17px 0;
 
-                            font-size: 14px;
-                            font-family: Montserrat-Light, Montserrat;
-                            font-weight: 300;
-                            color: #ffffff;
+                        img {
+                            width: 100%;
                         }
                     }
+                    .list-item-tag {
+                        width: 100%;
+                        height: 24px;
+                        margin-top: 24px;
+                        background-color: #f6236c;
+                        font-size: 14px;
+                        font-family: PingFangSC-Medium, PingFang SC;
+                        font-weight: 500;
+                        color: #ffffff;
+                        line-height: 24px;
+                        text-align: center;
+                    }
+                    &::after {
+                        content: "";
+                        display: block;
+                        position: absolute;
+                        width: 52px;
+                        height: 52px;
+                        background-image: url("~@/assets/triangle.png");
+                        background-size: 100% 100%;
+                        background-position: 0 0;
+                        top: 0;
+                        right: 0;
+                    }
+                    &::before {
+                        display: block;
+                        position: absolute;
+                        right: 2px;
+                        top: 4px;
+                        z-index: 9;
+                        font-size: 12px;
+                        font-family: PingFangSC-Regular, PingFang SC;
+                        font-weight: 400;
+                        color: #ffffff;
+                        line-height: 17px;
+                    }
+                }
+                li.list-item:nth-of-type(1)::before {
+                    content: "gift1";
+                }
+                li.list-item:nth-of-type(2)::before {
+                    content: "gift2";
                 }
             }
         }

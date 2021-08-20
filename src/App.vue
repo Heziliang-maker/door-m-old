@@ -12,7 +12,7 @@
     <transition name="van-fade">
       <Overlay :key="overlayKey" v-show="showCard" :show.sync="showCard" />
     </transition>
-    <transition name="van-fade">
+    <transition name="van-slide-right">
       <div v-show="isProductPage" ref="btnForDiscount" class="discount_btn" @click="handleGetDiscount"><img
              src="@/assets/discount_btn.png" alt="discount"></div>
     </transition>
@@ -70,7 +70,6 @@ export default {
         }
     },
     mounted() {
-      
         // 获取语言和汇率以及货币符号
         this.getCounryInfo();
         // 轮询

@@ -6,58 +6,15 @@ Vue.config.productionTip = false;
 //重置默认样式
 import "normalize.css";
 import "minireset.css";
-//
+// rem
 import "amfe-flexible";
-// 引入组件
-import {
-  Swipe,
-  SwipeItem,
-  Tabs,
-  Tab,
-  Grid,
-  GridItem,
-  Collapse,
-  CollapseItem,
-  Image as VanImage,
-  Skeleton,
-  Loading,
-  // Overlay,
-  Icon,
-  Toast,
-} from "vant";
-Toast.setDefaultOptions({ className: "notranslate" });
-import "vant/lib/swipe/style";
-import "vant/lib/swipe-item/style";
-import "vant/lib/tabs/style";
-import "vant/lib/grid/style";
-import "vant/lib/grid-item/style";
-import "vant/lib/collapse-item/style";
-import "vant/lib/collapse/style";
-import "vant/lib/loading/style";
-import "vant/lib/skeleton/style";
-// import "vant/lib/overlay/style";
-import "vant/lib/icon/style";
-import "vant/lib/toast/style";
-
+// api
 import { trackViewBehavior } from "./api/index";
-
-Vue.use(VanImage);
-Vue.use(Swipe);
-Vue.use(SwipeItem);
-Vue.use(Tabs);
-Vue.use(Tab);
-Vue.use(Grid);
-Vue.use(GridItem);
-Vue.use(Loading);
-Vue.use(Collapse);
-Vue.use(CollapseItem);
-Vue.use(Skeleton);
-// Vue.use(Overlay);
-Vue.use(Icon);
-Vue.use(Toast);
+// vant 注册组件
+import "./plugins/vant.js";
 // 国际化
 import "@/utils/translate_a.js";
-//copy功能
+//copy
 import VueClipboard from "vue-clipboard2";
 
 Vue.use(VueClipboard);
@@ -72,8 +29,6 @@ Vue.filter("priceGroup", (val) => {
     val.toString().split(".").length > 1 ? val.toString().split(".")[1] : ""
   }</a>`;
 });
-
-Vue.prototype.$toast = Toast;
 
 // 谷歌数据采集方法
 function decorateUrl(urlString) {

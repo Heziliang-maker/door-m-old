@@ -55,9 +55,11 @@ export default {
     width: calc(100vw - 18px);
     margin: 0 auto;
     .van-grid-item {
+        width: 50%;
+        flex-grow: 0;
+        overflow: hidden;
         .item-pic {
             overflow: hidden;
-
             margin-bottom: 5px;
         }
         .item-desc {
@@ -75,6 +77,10 @@ export default {
             line-height: 17px;
 
             margin-bottom: 12px;
+        }
+        .item-pic {
+            display: flex;
+            justify-content: center;
         }
         ::v-deep .item-price {
             width: 100%;

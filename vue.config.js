@@ -1,7 +1,9 @@
 /*
  * @Date: 2021-05-27
  */
-
+const IS_PROD = ["production", "prod"].includes(process.env.NODE_ENV);
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin;
 module.exports = {
   devServer: {
     port: 9527,
@@ -12,5 +14,15 @@ module.exports = {
         changeOrigin: true,
       },
     },
+  },
+  chainWebpack: (config) => {
+    // 打包分析
+    if (IS_PROD) {
+      config.plugin("webpack-report").use(BundleAnalyzerPlugin, [
+        {
+          analyzerMode: "static",
+        },
+      ]);
+    }
   },
 };

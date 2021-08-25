@@ -5,7 +5,7 @@
 
 <template>
   <div class="header" id="header">
-    <div class="logo">
+    <div class="logo" @click="$router.push('/home')">
       <img src="@/assets/header-logo.png" alt="">
     </div>
   </div>

@@ -17,6 +17,8 @@ import "@/utils/translate_a.js";
 //copy
 import VueClipboard from "vue-clipboard2";
 
+var URI = require("urijs");
+
 Vue.use(VueClipboard);
 //过滤器
 Vue.filter("countFix", (val1, val2) => {
@@ -131,7 +133,10 @@ const cb = ({ url, type, id, shopId }) => {
   let openUrl = "";
 
   if (shopId) {
-    // console.log("=>", "yesyes...", shopId);
+    const uri = new URI(url);
+
+    const hostname = uri.hostname();
+    url = url.replace(hostname, hostname + "/m");
     ///如果url中自带参数则拼接到后面
     const isParamsExist = ~url.indexOf("?");
     const channel = sessionStorage.getItem("channel");

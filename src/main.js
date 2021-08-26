@@ -134,7 +134,6 @@ const cb = ({ url, type, id, shopId }) => {
 
   if (shopId) {
     const uri = new URI(url);
-
     const hostname = uri.hostname();
     url = url.replace(hostname, hostname + "/m");
     ///如果url中自带参数则拼接到后面

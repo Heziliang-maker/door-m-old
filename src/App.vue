@@ -51,7 +51,7 @@ export default {
     data() {
         return {
             isReady: false,
-            showCard: true,
+            showCard: false,
             // 货币符号
             // ccy: "",
             ccy: "€",
@@ -88,6 +88,7 @@ export default {
     methods: {
         ready(isReady) {
             this.isReady = isReady;
+            this.showCard = true;
         },
         async handleSelectLang(cookieLang) {
             // 防止初始化第一次报错
@@ -187,7 +188,7 @@ export default {
     transition-delay: 0.3s;
     z-index: 99;
     img {
-      width: 102px;
+        width: 102px;
     }
 }
 </style>

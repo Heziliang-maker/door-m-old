@@ -16,12 +16,6 @@ const service = axios.create({
 // request interceptor
 service.interceptors.request.use(
   (config) => {
-    // if (store.getters.token) {
-    // config.headers["Authorization"] = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQXV0aCIsImV4cCI6MTYyMzUwNDIzOSwidWlkIjoicEFLVlZCWXl6VVdWOVZLc0RuQWhLUT09In0.xtKKSyRC2UFjMPVYTo1kx7lMjVLve9gsw8AHxAddUYw';
-    // config.headers["shopId"] = 'g2DKIjr29OxzwrNxj2401g==';
-    // console.log("=>", "添加请求头");
-    // }
-    // config.headers["Content-Type"] = "application/json";
     return config;
   },
   (error) => {
@@ -54,7 +48,7 @@ service.interceptors.response.use(
       //返回错误类型
       // return Promise.reject(new Error(res.errorMsg || "Error"));
       //这里暂时不抛出错误
-      return Promise.reject(new Error(res.errorMsg || "Error"));
+      return res;
     }
   },
   (error) => {

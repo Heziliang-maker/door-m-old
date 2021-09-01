@@ -10,7 +10,7 @@
       <Footer />
     </div>
     <transition name="van-fade">
-      <Overlay :key="overlayKey" v-show="showCard" :show.sync="showCard" />
+      <Overlay :key="overlayKey" :show.sync="showCard" />
     </transition>
     <transition name="van-slide-right">
       <div v-show="isProductPage" ref="btnForDiscount" class="discount_btn" @click="handleGetDiscount"><img

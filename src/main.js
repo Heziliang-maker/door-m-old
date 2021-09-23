@@ -17,7 +17,7 @@ import "@/utils/translate_a.js";
 //copy
 import VueClipboard from "vue-clipboard2";
 
-var URI = require("urijs");
+// var URI = require("urijs");
 
 Vue.use(VueClipboard);
 //过滤器
@@ -45,16 +45,16 @@ function decorateUrl(urlString) {
 
 // 获取query参数
 
-function getQueryVariable(query, variable) {
-  let vars = query.split("?");
-  for (let i = 0; i < vars.length; i++) {
-    let pair = vars[i].split("=");
-    if (pair[0] == variable) {
-      return pair[1];
-    }
-  }
-  return false;
-}
+// function getQueryVariable(query, variable) {
+//   let vars = query.split("?");
+//   for (let i = 0; i < vars.length; i++) {
+//     let pair = vars[i].split("=");
+//     if (pair[0] == variable) {
+//       return pair[1];
+//     }
+//   }
+//   return false;
+// }
 
 // 首次进入页面
 // if (sessionStorage.getItem("access") !== true) {
@@ -63,11 +63,11 @@ if (!sessionStorage.getItem("viewTime")) {
   sessionStorage.setItem("viewTime", Date.now());
 }
 // 首次进入页面
-const origin = getQueryVariable(window.location.search, "origin");
-if (origin) {
-  sessionStorage.setItem("channel", origin);
-  trackViewBehavior({ type: 1, origin: origin });
-}
+// const origin = getQueryVariable(window.location.search, "origin");
+// if (origin) {
+//   sessionStorage.setItem("channel", origin);
+//   trackViewBehavior({ type: 1, origin: origin });
+// }
 // sessionStorage.setItem("access", true);
 // }
 function doEnter() {
@@ -124,32 +124,44 @@ document.addEventListener(
 );
 
 const cb = ({ url, type, id, shopId }) => {
+  // let origin = "";
+
   //渠道
   trackViewBehavior({
     type,
     id,
-    origin: sessionStorage.getItem("channel"),
+    origin: window.getAttribute("origin"),
   });
+
   let openUrl = "";
 
-  if (shopId) {
-    const uri = new URI(url);
-    const hostname = uri.hostname();
-    url = url.replace(hostname, hostname + "/m");
+  if (url) {
+    // const uri = new URI(url);
+    // const hostname = uri.hostname();
+    // url = url.replace(hostname, hostname + "/m");
     ///如果url中自带参数则拼接到后面
-    const isParamsExist = ~url.indexOf("?");
-    const channel = sessionStorage.getItem("channel");
+    // const isParamsExist = ~url.indexOf("?");
+    // const channel = sessionStorage.getItem("channel");
 
-    if (isParamsExist) {
-      openUrl = url + (channel ? "&origin=" + channel : "");
-    } else {
-      openUrl = url + (channel ? "?origin=" + channel : "");
-    }
+    // if (isParamsExist) {
+    //   openUrl = url + (channel ? "&origin=" + channel : "");
+    // } else {
+    //   openUrl = url + (channel ? "?origin=" + channel : "");
+    // }
     // console.log("=>", "yesyes...", openUrl);
-  } else {
-    openUrl = decorateUrl(url);
+
+    if (url.indexOf("?") != -1) {
+      openUrl = url + (window.analysis() ? "&" + window.analysis() : "");
+    } else {
+      openUrl = url + (window.analysis() ? "?" + window.analysis() : "");
+    }
+    openUrl = decorateUrl(openUrl);
+    window.open(openUrl, "_blank");
+    // } else {
+    //   openUrl = decorateUrl(url);
+    // }
+    // window.open(openUrl, "_blank");
   }
-  window.open(openUrl, "_blank");
 };
 
 Vue.directive("jumpTo", function(el, binding) {

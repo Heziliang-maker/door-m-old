@@ -63,7 +63,7 @@
       </div>
     </div>
     <!-- 4 -->
-    <div class="textbox">
+    <!-- <div class="textbox">
       <div class="textbox-title">Behavioural advertising </div>
       <div class="textbox-text">
         <p>
@@ -83,7 +83,7 @@
           opt-out portal at: http://optout.aboutads.info/. 
         </p>
       </div>
-    </div>
+    </div> -->
     <!-- 5 -->
     <div class="textbox">
       <div class="textbox-title">Do not track </div>

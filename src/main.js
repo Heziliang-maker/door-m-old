@@ -63,13 +63,12 @@ if (!sessionStorage.getItem("viewTime")) {
   sessionStorage.setItem("viewTime", Date.now());
 }
 // 首次进入页面
-// const origin = getQueryVariable(window.location.search, "origin");
-// if (origin) {
-//   sessionStorage.setItem("channel", origin);
-//   trackViewBehavior({ type: 1, origin: origin });
-// }
+const origin = window.getAttribute("origin");
+if (origin) {
+  trackViewBehavior({ type: 1, origin: origin });
+}
 // sessionStorage.setItem("access", true);
-// }
+
 function doEnter() {
   console.log("=>", "进入页面");
   if (!sessionStorage.getItem("viewTime")) {
@@ -84,7 +83,7 @@ async function doLeave() {
     await trackViewBehavior({
       type: 7,
       viewTime: totalTime,
-      origin: sessionStorage.getItem("channel"),
+      origin: window.getAttribute("origin"),
     });
     //清除
     sessionStorage.removeItem("viewTime");

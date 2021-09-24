@@ -1,6 +1,9 @@
 /*
  * @Date: 2021-05-27
  */
+
+const Timestamp = new Date().getTime();
+
 const IS_PROD = ["production", "prod"].includes(process.env.NODE_ENV);
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
@@ -21,6 +24,14 @@ module.exports = {
       config.plugin("webpack-report").use(BundleAnalyzerPlugin, [
         {
           analyzerMode: "static",
+        },
+      ]);
+      config.output.filename("js/[name]." + Timestamp + ".js").end();
+      config.output.chunkFilename("js/[name]." + Timestamp + ".js").end();
+      config.plugin("extract-css").tap((args) => [
+        {
+          filename: `css/[name].${Timestamp}.css`,
+          chunkFilename: `css/[name].${Timestamp}.css`,
         },
       ]);
     }

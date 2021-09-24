@@ -23,7 +23,7 @@
           </van-form>
           <!-- <input v-model="email" placeholder="Email Address" type="text" @keyup.enter="handleSubscribe"> -->
         </div>
-        <div class="main1-footer" @click="handleCancel">subscribe later</div>
+        <div class="main1-footer" @click="handleCancel">Subscribe later</div>
       </div>
       <transition name="van-slide-right">
         <div class="main-2" v-show="step === 2">

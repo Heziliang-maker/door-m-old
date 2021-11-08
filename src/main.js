@@ -10,6 +10,7 @@ import "minireset.css";
 import "amfe-flexible";
 // api
 import { trackViewBehavior } from "./api/index";
+
 // vant 注册组件
 import "./plugins/vant.js";
 // 国际化
@@ -122,7 +123,7 @@ document.addEventListener(
   false
 );
 
-const cb = ({ url, type, id, shopId }) => {
+const cb = ({ url, type, id, detailQuery }) => {
   // let origin = "";
 
   //渠道
@@ -133,8 +134,9 @@ const cb = ({ url, type, id, shopId }) => {
   });
 
   let openUrl = "";
-
   if (url) {
+    console.log("=>", "..", detailQuery);
+
     // const uri = new URI(url);
     // const hostname = uri.hostname();
     // url = url.replace(hostname, hostname + "/m");
@@ -155,6 +157,17 @@ const cb = ({ url, type, id, shopId }) => {
       openUrl = url + (window.analysis() ? "?" + window.analysis() : "");
     }
     openUrl = decorateUrl(openUrl);
+    console.log("openUrl=>", openUrl, router.history.current.query);
+
+    if (detailQuery) {
+      // const curRoute = router.history.current;
+      // console.log("=>", "..");
+      router.push({
+        path: "/detail",
+        query: { requestQuery: JSON.stringify(detailQuery), url: openUrl },
+      });
+      return;
+    }
     window.open(openUrl, "_blank");
     // } else {
     //   openUrl = decorateUrl(url);
@@ -164,10 +177,8 @@ const cb = ({ url, type, id, shopId }) => {
 };
 
 Vue.directive("jumpTo", function(el, binding) {
-  const { url, type, id, shopId } = binding.value;
-
   el.onclick = function() {
-    cb({ url, type, id, shopId });
+    cb(binding.value);
   };
 });
 

@@ -1,9 +1,9 @@
-// 查询折扣
-import request from "@/plugins/request";
+import requestAdmin from "@/plugins/request-admin";
+import requestShop from "@/plugins/request-shop";
 
 // 查询折扣
 export function queryDiscount() {
-  return request({
+  return requestAdmin({
     url: "/portal/query_discount",
     method: "post",
   });
@@ -11,7 +11,7 @@ export function queryDiscount() {
 
 //用户订阅
 export function userSubscribe(emailAddress) {
-  return request({
+  return requestAdmin({
     url: "/portal/subscription",
     method: "post",
     data: {
@@ -22,7 +22,7 @@ export function userSubscribe(emailAddress) {
 
 // 语言汇率转换
 export function queryLanguage(data) {
-  return request({
+  return requestAdmin({
     url: "/portal/change_rate",
     method: "post",
     data: {
@@ -33,14 +33,14 @@ export function queryLanguage(data) {
 
 // 地区查询语言汇率
 export function queryLocalLanguage() {
-  return request({
+  return requestAdmin({
     url: "/portal/query_test",
     method: "get",
   });
 }
 
 export function trackViewBehavior({ type, id, origin, viewTime }) {
-  return request({
+  return requestAdmin({
     url: "/analyze/portal/visit/view",
     method: "post",
     data: {
@@ -53,11 +53,26 @@ export function trackViewBehavior({ type, id, origin, viewTime }) {
 }
 
 export function queryPortalProducts(sort = null) {
-  return request({
+  return requestAdmin({
     url: "/portal/query_portals",
     method: "post",
     data: {
       sort,
+    },
+  });
+}
+export function queryProductsDetail({ productId, shopId }) {
+  return requestShop({
+    url: "/products/query/details",
+    method: "post",
+    headers: {
+      shopid: shopId,
+      "user-key": "3c406742-e6d2-4d76-abe0-5e43b499f7f9",
+    },
+    data: {
+      query: {
+        productId,
+      },
     },
   });
 }

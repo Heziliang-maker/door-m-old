@@ -22,8 +22,12 @@ import {
   Button,
   Sticky,
   Field,
-  Form
+  Form,
+  Rate,
 } from "vant";
+import { Lazyload } from "vant";
+
+Vue.use(Lazyload);
 Toast.setDefaultOptions({ className: "notranslate" });
 import "vant/lib/swipe/style";
 import "vant/lib/swipe-item/style";
@@ -39,6 +43,7 @@ import "vant/lib/icon/style";
 import "vant/lib/toast/style";
 import "vant/lib/field/style";
 import "vant/lib/button/style";
+import "vant/lib/rate/style";
 
 Vue.use(VanImage);
 Vue.use(Swipe);
@@ -58,4 +63,5 @@ Vue.use(Toast);
 Vue.use(Sticky);
 Vue.use(Field);
 Vue.use(Form);
+Vue.use(Rate);
 Vue.prototype.$toast = Toast;

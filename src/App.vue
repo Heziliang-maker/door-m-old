@@ -4,17 +4,35 @@
       <Header />
     </div>
     <div class="layout-main ">
-      <router-view :rate='rate' :ccy='ccy' :show.sync="showCard" @ready="ready" />
+      <router-view
+        :rate='rate'
+        :ccy='ccy'
+        :show.sync="showCard"
+        @ready="ready"
+      />
     </div>
-    <div class="layout-footer notranslate" v-if="isReady">
+    <div
+      class="layout-footer notranslate"
+      v-if="isReady"
+    >
       <Footer />
     </div>
     <transition name="van-fade">
-      <Overlay :key="overlayKey" :show.sync="showCard" />
+      <Overlay
+        :key="overlayKey"
+        :show.sync="showCard"
+      />
     </transition>
     <transition name="van-slide-right">
-      <div v-show="isProductPage" ref="btnForDiscount" class="discount_btn" @click="handleGetDiscount"><img
-             src="@/assets/dialog_btn.png" alt="discount"></div>
+      <div
+        v-show="isProductPage"
+        ref="btnForDiscount"
+        class="discount_btn"
+        @click="handleGetDiscount"
+      ><img
+          src="@/assets/dialog_btn.png"
+          alt="discount"
+        ></div>
     </transition>
   </div>
 </template>
@@ -88,7 +106,13 @@ export default {
     methods: {
         ready(isReady) {
             this.isReady = isReady;
-            this.showCard = true;
+            // avoid repeat showcard
+            if (localStorage.getItem("isFirstView") == 1) {
+                this.showCard = false;
+            } else {
+                localStorage.setItem("isFirstView", 1);
+                this.showCard = true;
+            }
         },
         async handleSelectLang(cookieLang) {
             // 防止初始化第一次报错

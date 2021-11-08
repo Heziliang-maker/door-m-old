@@ -16,6 +16,10 @@ module.exports = {
         target: "http://106.15.62.70:17804/",
         changeOrigin: true,
       },
+      "^/shop/v1": {
+        target: "http://106.15.62.70:17804/",
+        changeOrigin: true,
+      },
     },
   },
   chainWebpack: (config) => {

@@ -4,30 +4,63 @@
 -->
 <template>
   <div>
-    <van-grid :center="false" :border="false" :column-num="2">
-      <van-grid-item v-for="(item,index) in list" :key="index"
-                     v-jumpTo={url:item.productUrl,type:2,id:item.id,shopId:item.shopId,}>
+    <van-grid
+      :center="false"
+      :border="false"
+      :column-num="2"
+    >
+      <!--   productId:item.productId,shopId:item.shopId -->
+      <van-grid-item
+        v-for="(item,index) in list"
+        :key="index"
+        v-jumpTo="{url:item.productUrl,type:2,id:item.id,shopId:item.shopId,
+        detailQuery:{
+          productId:item.productId,
+          shopId:item.shopId
+        }
+        }"
+      >
         <div class="grid-list-item">
           <div class="item-pic">
-            <van-image width="158px" height="158px" :src="item.productImg" fit="cover">
+            <van-image
+              width="158px"
+              height="158px"
+              :src="item.productImg"
+              fit="cover"
+            >
               <template v-slot:loading>
-                <van-loading type="spinner" size="20" />
+                <van-loading
+                  type="spinner"
+                  size="20"
+                />
               </template>
             </van-image>
             <!-- <img :src="item.productImg" alt=""> -->
           </div>
-          <div class="item-desc" v-html="item.productName">
+          <div
+            class="item-desc"
+            v-html="item.productName"
+          >
           </div>
           <div class="item-price notranslate">
             <div class="current">
-              <span class="current-price" v-html="$options.filters.priceGroup(item.retailPrice)"></span>
-              <span class="local-price" v-if="rate&&rate!=1&&ccy!=='$'">≈{{ccy}}
+              <span
+                class="current-price"
+                v-html="$options.filters.priceGroup(item.retailPrice)"
+              ></span>
+              <span
+                class="local-price"
+                v-if="rate&&rate!=1&&ccy!=='$'"
+              >≈{{ccy}}
                 {{(item.retailPrice*rate).toFixed(2)}}</span>
             </div>
             <!-- <span>
               ${{item.retailPrice.toString().split('.')[0]}}<a>{{item.retailPrice.toString().split('.').length>1?item.retailPrice.toString().split('.')[1]:''}}</a>
             </span> -->
-            <span class="origin" v-html="$options.filters.countFix(item.reamt)"></span>
+            <span
+              class="origin"
+              v-html="$options.filters.countFix(item.reamt)"
+            ></span>
           </div>
         </div>
       </van-grid-item>

@@ -8,6 +8,7 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@better-scroll/core": "^2.4.2",
     "amfe-flexible": "^2.2.1",
     "core-js": "^3.6.5",
     "minireset.css": "^0.0.7",

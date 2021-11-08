@@ -147,7 +147,7 @@ export default {
         }
     },
     mounted() {
-        this.bs = new BScroll(".wrapper", {
+        this.bs = new BScroll(this.$refs.wrapperRef, {
             scrollX: true,
             probeType: 3,
             bounce: true,

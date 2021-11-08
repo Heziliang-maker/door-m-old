@@ -22,6 +22,45 @@
       >
         <div class="grid-list-item">
           <div class="item-pic">
+            <!-- 视频播放按钮 -->
+            <!-- <iframe  src="@/assets/bofang.svg" width="30" height="30" frameborder="0"></iframe> -->
+            <img
+              v-show="!!item.video && !isView"
+              class="item-pic-play"
+              src="@/assets/bofang.png"
+              alt="播放该视频"
+              @click.stop="handleClickVideoPlayIcon(index)"
+            >
+            <!-- <van-icon
+              v-show="!!item.video && !isView"
+              class="item-pic-play"
+              name="play-circle-o"
+              size="30"
+              color="#f6f6f5"
+              @click.stop.native="handleClickVideoPlayIcon(index)"
+            /> -->
+            <transition name="van-fade">
+              <div
+                class="item-pic-player"
+                v-show="!!item.video && isView"
+              >
+                <!-- 视频 -->
+                <video
+                  :ref="'video'+index"
+                  :src="item.video"
+                  :poster="item.videoCover"
+                  muted
+                  preload="auto"
+                />
+                <!-- 视频关闭icon -->
+                <van-icon
+                  class="item-pic-player__close"
+                  size="14"
+                  name="cross"
+                  @click.stop.native="isView = false"
+                />
+              </div>
+            </transition>
             <van-image
               width="158px"
               height="158px"
@@ -79,11 +118,36 @@ export default {
         },
         ccy: String,
         rate: String | Number
+    },
+    data() {
+        return {
+            isView: false
+        };
+    },
+    methods: {
+        handleClickVideoPlayIcon(index) {
+            this.isView = true;
+            this.$nextTick(() => {
+                const videoPlayer = this.$refs[`video${index}`][0];
+                console.log("=>", videoPlayer);
+                videoPlayer.play();
+                videoPlayer.onended = () => {
+                    this.isView = false;
+                };
+            });
+        }
     }
 };
 </script>
 
 <style lang="scss" scoped>
+ul,
+li,
+div,
+p,
+img {
+    // outline: 1px solid #00cec9;
+}
 .van-grid {
     width: calc(100vw - 18px);
     margin: 0 auto;
@@ -112,8 +176,47 @@ export default {
             margin-bottom: 12px;
         }
         .item-pic {
+            width: 100%;
+            position: relative;
             display: flex;
             justify-content: center;
+            .item-pic-play {
+                position: absolute;
+                width: fit-content;
+                right: 15%;
+                bottom: 10%;
+                z-index: 99;
+                width: 36px;
+                height: 36px;
+            }
+            // 悬浮视频控件
+            .item-pic-player {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                left: 0;
+                top: 0;
+                // background-color: red;
+                z-index: 99;
+                // 播放icon
+                > video {
+                    width: 100%;
+                    height: 100%;
+                    background-color: #000;
+                    object-fit: contain;
+                    // height: 100vh;
+                }
+
+                &__close {
+                    position: absolute;
+                    // topposition: absolute;
+                    right: 15px;
+                    top: 15px;
+
+                    z-index: 99;
+                    color: #fff;
+                }
+            }
         }
         ::v-deep .item-price {
             width: 100%;

@@ -14,12 +14,18 @@
         v-show="!!dataSource.video && !isView"
       >
         <!-- 视频播放按钮 -->
-        <van-icon
+        <img
+          v-show="!!dataSource.video && !isView"
+          src="@/assets/bofang.png"
+          alt="播放该视频"
+          @click.stop="handleClickVideoPlayIcon"
+        >
+        <!-- <van-icon
           name="play-circle-o"
           size="50"
           color="#f6f6f5"
           @click="handleClickVideoPlayIcon"
-        />
+        /> -->
       </div>
       <transition name="van-fade">
         <div
@@ -197,7 +203,10 @@ img {
             transform: translateX(-50%);
             bottom: 10%;
             z-index: 99;
-            text-align: center;
+            > img {
+                width: 46px;
+                height: 46px;
+            }
         }
         // 悬浮视频控件
         .product-main-player {

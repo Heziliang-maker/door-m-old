@@ -11,7 +11,7 @@
     >
       <div
         class="product-main-icon"
-        v-show="!!dataSource.video && !isView"
+        v-if="!!dataSource.video && !isView"
       >
         <!-- 视频播放按钮 -->
         <img
@@ -30,17 +30,17 @@
       <transition name="van-fade">
         <div
           class="product-main-player"
-          v-show="!!dataSource.video && isView"
+          v-if="!!dataSource.video && isView"
         >
           <!-- 视频 -->
           <video
             ref="video"
+            controls
             :src="dataSource.video"
             :poster="dataSource.videoCover"
             preload="auto"
-            x5-video-player-fullscreen="true"
-            x5-video-player-type="h5"
           />
+          <!-- @click="handleClickVideo" -->
           <!-- 视频关闭icon -->
           <van-icon
             class="product-main-player__close"
@@ -94,6 +94,7 @@
     <div class="product-name">{{ dataSource.name }}</div>
     <!-- 商品评分 -->
     <Score
+      v-show="!!dataSource.star"
       class="product-score"
       v-model="dataSource.star"
       :size="14"
@@ -103,7 +104,9 @@
     <div class="product-price">
       <div class="nowPrice">
         <a
-          class="store-price">{{ dataSource.retailPrice + "" + dataSource.ccy }}</a>
+          v-if="dataSource.retailPrice "
+          class="store-price"
+        >{{ dataSource.retailPrice + "" + dataSource.ccy }}</a>
         <!-- <a class="local-price">{{ $translatePriceRate(nowPrice) }}</a> -->
       </div>
       <a
@@ -121,7 +124,7 @@
 import BScroll from "@better-scroll/core";
 import Score from "@/components/Score.vue";
 export default {
-    name: "ProductImage",
+    name: "ProductDisplay",
     props: {
         dataSource: {
             type: Object,
@@ -172,6 +175,15 @@ export default {
                     console.log("=>", "视频结束");
                 };
             });
+        },
+        handleClickVideo() {
+            const videoPlayer = this.$refs.video;
+            const paused = videoPlayer.paused;
+            if (paused) {
+                videoPlayer.play();
+            } else {
+                videoPlayer.pause();
+            }
         }
     }
 };

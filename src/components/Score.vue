@@ -9,9 +9,9 @@
       allow-half
       void-color="#eee"
     />
-    <!-- <span class="score-num">
-      <a>{{ $attrs.value }}</a>
-    </span> -->
+    <span class="score-num">
+      <a>{{ $attrs.value }} points</a>
+    </span>
   </div>
 </template>
 
@@ -27,9 +27,13 @@ div,
 span {
     // outline: 1px solid red;
 }
+.score {
+    line-height: 12px;
+    margin: 6px 0;
+}
 .score-star {
     margin-right: 4px;
-    font-size: 18px;
+    // height: 30px;
 }
 .score-num {
     font-size: 12px;

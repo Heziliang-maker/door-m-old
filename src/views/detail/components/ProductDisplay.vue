@@ -224,6 +224,10 @@ img {
         .main-img {
             width: calc(10rem - 28px);
             height: calc(10rem - 28px);
+            > img {
+                width: 100%;
+                height: 100%;
+            }
         }
         // 悬浮视频控件
         .product-main-player {

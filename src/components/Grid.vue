@@ -176,12 +176,12 @@ img {
             overflow: hidden;
             margin-bottom: 5px;
 
-            // ::v-deep {
-            //     .van-img > img {
-            //         width: 100%;
-            //         height: 100%;
-            //     }
-            // }
+            ::v-deep {
+                .van-img > img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
         }
         .item-desc {
             flex: 0 0 158px;

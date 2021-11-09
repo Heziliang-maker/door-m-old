@@ -30,7 +30,7 @@
       <transition name="van-fade">
         <div
           class="product-main-player"
-          v-if="!!dataSource.video && isView"
+          v-show="!!dataSource.video && isView"
         >
           <!-- 视频 -->
           <video
@@ -46,7 +46,7 @@
             class="product-main-player__close"
             size="14"
             name="cross"
-            @click="isView = false"
+            @click="handleClickVideoCloseIcon"
           />
         </div>
       </transition>
@@ -164,6 +164,8 @@ export default {
         },
         changeImage(index) {
             if (this.isView) {
+                const videoPlayer = this.$refs.video;
+                videoPlayer.pause();
                 this.isView = false;
             }
             this.curMainImageIndex = index;
@@ -173,12 +175,21 @@ export default {
             this.isView = true;
             this.$nextTick(() => {
                 const videoPlayer = this.$refs.video;
-                videoPlayer.play();
+                // console.log('=>',videoPlayer)
+                // console.log("videoPlayer.paused=>", videoPlayer.paused);
+                setTimeout(() => {
+                    videoPlayer.play();
+                }, 300);
+
                 videoPlayer.onended = () => {
-                    this.isView = false;
                     console.log("=>", "视频结束");
+                    videoPlayer.load();
+                    this.isView = false;
                 };
             });
+        },
+        handleClickVideoCloseIcon() {
+            this.isView = false;
         },
         handleClickVideo() {
             const videoPlayer = this.$refs.video;
@@ -305,7 +316,7 @@ img {
         .nowPrice {
             .store-price {
                 font-size: 18px;
-                font-weight: 300;
+                font-weight: 600;
                 color: #cb0000;
                 line-height: 20px;
                 margin-right: 10px;

@@ -12,7 +12,8 @@
       <!--   productId:item.productId,shopId:item.shopId -->
       <van-grid-item
         v-for="(item,index) in list"
-        :key="index"
+        :key="item.productUrl"
+        :ref="'gridItem'+index"
         v-jumpTo="{url:item.productUrl,type:2,id:item.id,shopId:item.shopId,
         detailQuery:{
           productId:item.productId,
@@ -25,11 +26,11 @@
             <!-- 视频播放按钮 -->
             <!-- <iframe  src="@/assets/bofang.svg" width="30" height="30" frameborder="0"></iframe> -->
             <img
-              v-show="!!item.video && !isView"
+              v-show="!!item.video && !item.isView"
               class="item-pic-play"
               src="@/assets/bofang.png"
               alt="播放该视频"
-              @click.stop="handleClickVideoPlayIcon(index)"
+              @click.stop="handleClickVideoPlayIcon(index,item.productUrl)"
             >
             <!-- <van-icon
               v-show="!!item.video && !isView"
@@ -42,7 +43,7 @@
             <transition name="van-fade">
               <div
                 class="item-pic-player"
-                v-show="!!item.video && isView"
+                v-show="!!item.video && item.isView"
               >
                 <!-- 视频 -->
                 <video
@@ -57,7 +58,7 @@
                   class="item-pic-player__close"
                   size="14"
                   name="cross"
-                  @click.stop.native="isView = false"
+                  @click.stop.native="item.isView = false"
                 />
               </div>
             </transition>
@@ -136,20 +137,17 @@ export default {
         ccy: String,
         rate: String | Number
     },
-    data() {
-        return {
-            isView: false
-        };
-    },
     methods: {
-        handleClickVideoPlayIcon(index) {
-            this.isView = true;
+        handleClickVideoPlayIcon(index, productUrl) {
+            // this.isView = true;
+            this.$emit("update", productUrl);
+
             this.$nextTick(() => {
                 const videoPlayer = this.$refs[`video${index}`][0];
                 console.log("=>", videoPlayer);
                 videoPlayer.play();
                 videoPlayer.onended = () => {
-                    this.isView = false;
+                    this.$emit("update", productUrl);
                 };
             });
         }

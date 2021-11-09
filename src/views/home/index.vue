@@ -17,14 +17,33 @@
     <!-- tab + lsit 展示 -->
     <div class="grid">
       <!-- tabs -->
-      <van-tabs v-model="curTabName" color="#000000" line-height='1px' line-width='90px' :ellipsis="false">
-        <van-tab v-for="(tab,i) in TabList" :key="i" :title="tab" :name="tab"></van-tab>
+      <van-tabs
+        v-model="curTabName"
+        color="#000000"
+        line-height='1px'
+        line-width='90px'
+        :ellipsis="false"
+      >
+        <van-tab
+          v-for="(tab,i) in TabList"
+          :key="i"
+          :title="tab"
+          :name="tab"
+        ></van-tab>
       </van-tabs>
       <!-- ----------- -->
-      <Grid :rate='rate' :ccy='ccy' :list="curListForTab" />
+      <Grid
+        :rate='rate'
+        :ccy='ccy'
+        :list="curListForTab"
+        @update="updateCurListForTab"
+      />
       <!-- ----------- -->
     </div>
-    <div class="seemore" @click="handleSeemore">
+    <div
+      class="seemore"
+      @click="handleSeemore"
+    >
       <div>more ></div>
     </div>
   </div>
@@ -72,6 +91,11 @@ export default {
         }
     },
     methods: {
+        updateCurListForTab(productUrl) {
+            const target = this.curListForTab.find((item) => item.productUrl === productUrl);
+            target.isView = !target.isView;
+            console.log("=target>", target);
+        },
         initData() {
             queryPortalProducts().then((res) => {
                 const data = res.result[0];
@@ -81,6 +105,11 @@ export default {
                 this.hotsaleList = [list1, list2]; //not responsive
                 this.TabList = Object.keys(data.stringListMap);
                 this.curTabName = this.TabList[0]; //默认为第一项
+                this.TabList.forEach((cate) => {
+                    data.stringListMap[cate].forEach((item) => {
+                        item.isView = false;
+                    });
+                });
                 this.cateMap = data.stringListMap;
                 this.$nextTick(() => {
                     this.$emit("ready", true);

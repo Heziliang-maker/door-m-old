@@ -62,10 +62,11 @@
               </div>
             </transition>
             <van-image
-              width="158px"
-              height="158px"
+              class="van-img"
+              :width="158"
+              :height="158"
               :src="item.productImg"
-              fit="cover"
+              fit="contain"
             >
               <template v-slot:loading>
                 <van-loading
@@ -174,6 +175,13 @@ img {
         .item-pic {
             overflow: hidden;
             margin-bottom: 5px;
+
+            // ::v-deep {
+            //     .van-img > img {
+            //         width: 100%;
+            //         height: 100%;
+            //     }
+            // }
         }
         .item-desc {
             flex: 0 0 158px;

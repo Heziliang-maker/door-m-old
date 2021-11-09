@@ -88,6 +88,10 @@
             :size="14"
             readonly
           />
+          <div
+            v-else
+            class="item-gap"
+          ></div>
           <div class="item-price notranslate">
             <div class="current">
               <span
@@ -184,7 +188,9 @@ img {
             overflow: hidden;
             text-overflow: ellipsis;
             line-height: 17px;
-            margin-bottom: 6px;
+        }
+        .item-gap {
+            height: 6px;
         }
         .item-star {
             // margin-bottom: 8px;
@@ -233,7 +239,7 @@ img {
             }
         }
         ::v-deep .item-price {
-            margin-top: 6px;
+            // margin-top: 6px;
             width: 100%;
             overflow: hidden;
             white-space: nowrap;

@@ -163,6 +163,9 @@ export default {
             // this.bs.scrollTo(index);
         },
         changeImage(index) {
+            if (this.isView) {
+                this.isView = false;
+            }
             this.curMainImageIndex = index;
             this.$refs.mySwiper.swipeTo(index);
         },

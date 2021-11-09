@@ -224,7 +224,7 @@ img {
         .main-img {
             width: calc(10rem - 28px);
             height: calc(10rem - 28px);
-            > img {
+            ::v-deep > img {
                 width: 100%;
                 height: 100%;
             }

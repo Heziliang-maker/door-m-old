@@ -9,9 +9,9 @@
       allow-half
       void-color="#eee"
     />
-    <span class="score-num">
+    <!-- <span class="score-num">
       <a>{{ $attrs.value }}</a>
-    </span>
+    </span> -->
   </div>
 </template>
 
@@ -23,8 +23,13 @@ export default {
 
 
 <style lang="scss" scoped>
+div,
+span {
+    // outline: 1px solid red;
+}
 .score-star {
     margin-right: 4px;
+    font-size: 18px;
 }
 .score-num {
     font-size: 12px;

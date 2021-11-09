@@ -81,6 +81,13 @@
             v-html="item.productName"
           >
           </div>
+          <Score
+            class="item-star"
+            v-if="!!item.starLevel"
+            v-model="item.starLevel"
+            :size="14"
+            readonly
+          />
           <div class="item-price notranslate">
             <div class="current">
               <span
@@ -108,7 +115,12 @@
 </template>
 
 <script>
+import Score from "./Score.vue";
 export default {
+    name: "Grid",
+    components: {
+        Score
+    },
     props: {
         list: {
             type: Array,
@@ -172,8 +184,10 @@ img {
             overflow: hidden;
             text-overflow: ellipsis;
             line-height: 17px;
-
-            margin-bottom: 12px;
+            margin-bottom: 6px;
+        }
+        .item-star {
+            // margin-bottom: 8px;
         }
         .item-pic {
             width: 100%;
@@ -219,6 +233,7 @@ img {
             }
         }
         ::v-deep .item-price {
+            margin-top: 6px;
             width: 100%;
             overflow: hidden;
             white-space: nowrap;

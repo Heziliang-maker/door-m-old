@@ -62,8 +62,7 @@
           :key="item.url"
         >
           <van-image
-            width="10rem"
-            height="10rem"
+            class="main-img"
             fit="contain"
             :src="item.url"
           />
@@ -160,6 +159,8 @@ export default {
     methods: {
         onSwiperChange(index) {
             this.curMainImageIndex = index;
+            // this.bs.refresh();
+            // this.bs.scrollTo(index);
         },
         changeImage(index) {
             this.curMainImageIndex = index;
@@ -219,6 +220,10 @@ img {
                 width: 46px;
                 height: 46px;
             }
+        }
+        .main-img {
+            width: calc(10rem - 28px);
+            height: calc(10rem - 28px);
         }
         // 悬浮视频控件
         .product-main-player {

@@ -295,7 +295,8 @@ img {
                     min-width: 78px;
                     height: 78px;
                     background-position: center;
-                    background-size: cover;
+                    background-size: contain;
+                    background-repeat: no-repeat;
                     margin-right: 12px;
                     border-radius: 2px;
                     border: 1px #fff solid;

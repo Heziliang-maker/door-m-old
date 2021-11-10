@@ -147,14 +147,21 @@ export default {
             return this.dataSource.pics;
         }
     },
-    mounted() {
-        this.bs = new BScroll(".wrapper", {
-            scrollX: true,
-            probeType: 3,
-            bounce: true,
-            eventPassthrough: "vertical"
-        });
+    watch: {
+        dataSource() {
+            this.$nextTick(() => {
+                // console.log("1=>", this.images);
+                // console.log("2=>", this.$refs.wrapperRef);
+                this.bs = new BScroll(this.$refs.wrapperRef, {
+                    scrollX: true,
+                    probeType: 3,
+                    bounce: true,
+                    eventPassthrough: "vertical"
+                });
+            });
+        }
     },
+    mounted() {},
     beforeDestroy() {
         this.bs.destroy();
     },

@@ -267,8 +267,7 @@ img {
                 position: absolute;
                 // topposition: absolute;
                 right: 15px;
-                top: 15px;
-
+                top: 30px;
                 z-index: 99;
                 color: #fff;
             }

@@ -39,6 +39,8 @@
             :src="dataSource.video"
             :poster="dataSource.videoCover"
             preload="auto"
+            playsinline
+            webkit-playsinline
           />
           <!-- @click="handleClickVideo" -->
           <!-- 视频关闭icon -->

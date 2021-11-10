@@ -51,6 +51,8 @@
                   :src="item.video"
                   :poster="item.videoCover"
                   muted
+                  playsinline
+                  webkit-playsinline
                   preload="auto"
                 />
                 <!-- 视频关闭icon -->
@@ -144,7 +146,7 @@ export default {
 
             this.$nextTick(() => {
                 const videoPlayer = this.$refs[`video${index}`][0];
-                console.log("=>", videoPlayer);
+
                 videoPlayer.play();
                 videoPlayer.onended = () => {
                     this.$emit("update", productUrl);

@@ -391,10 +391,10 @@ function Translate(myLanguage) {
     h("google.translate.m", q);
   }
   function A(a) {
-    var b = document.getElementsByTagName("body")[0];
+    var b = document.getElementsByTagName("head")[0];
     b ||
       (b = document.body.parentNode.appendChild(
-        document.createElement("body")
+        document.createElement("head")
       ));
     b.appendChild(a);
   }

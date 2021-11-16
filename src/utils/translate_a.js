@@ -531,6 +531,10 @@ function Translate(myLanguage) {
     script.type = "text/javascript";
     script.src = "//code.tidio.co/pu3vj2noeexhq2mzg8typxg6rfkvtwmt.js";
     document.getElementsByTagName("head")[0].appendChild(script);
+    var script2 = document.createElement("script");
+    script2.type = "text/javascript";
+    script2.src = "https://www.googletagmanager.com/gtag/js?id=UA-200232091-1";
+    document.getElementsByTagName("head")[0].appendChild(script2);
     // console.log(document.getElementsByClassName("goog-te-menu-frame")[0]);
   }, 1000);
 }

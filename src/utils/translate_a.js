@@ -391,10 +391,10 @@ function Translate(myLanguage) {
     h("google.translate.m", q);
   }
   function A(a) {
-    var b = document.getElementsByTagName("head")[0];
+    var b = document.getElementsByTagName("body")[0];
     b ||
       (b = document.body.parentNode.appendChild(
-        document.createElement("head")
+        document.createElement("body")
       ));
     b.appendChild(a);
   }
@@ -404,6 +404,7 @@ function Translate(myLanguage) {
     "application/xhtml+xml" === b.contentType && (d = d.toLowerCase());
     d = b.createElement(d);
     d.type = "text/javascript";
+    // d.defer = "defer";
     d.charset = "UTF-8";
     if (void 0 === x) {
       b = null;
@@ -530,11 +531,13 @@ function Translate(myLanguage) {
     var script = document.createElement("script");
     script.type = "text/javascript";
     script.src = "//code.tidio.co/pu3vj2noeexhq2mzg8typxg6rfkvtwmt.js";
-    document.getElementsByTagName("head")[0].appendChild(script);
+    script.defer = "defer";
+    document.getElementsByTagName("body")[0].appendChild(script);
     var script2 = document.createElement("script");
     script2.type = "text/javascript";
     script2.src = "https://www.googletagmanager.com/gtag/js?id=UA-200232091-1";
-    document.getElementsByTagName("head")[0].appendChild(script2);
+    script2.defer = "defer";
+    document.getElementsByTagName("body")[0].appendChild(script2);
     // console.log(document.getElementsByClassName("goog-te-menu-frame")[0]);
   }, 1000);
 }

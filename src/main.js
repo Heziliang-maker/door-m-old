@@ -15,6 +15,7 @@ import { trackViewBehavior } from "./api/index";
 import "./plugins/vant.js";
 // 国际化
 import "@/utils/translate_a.js";
+import "@/utils/tools.js";
 //copy
 import VueClipboard from "vue-clipboard2";
 

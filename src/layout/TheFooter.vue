@@ -16,7 +16,7 @@
     </div>
     <div class="footer-bot">
       <div class="footer-bot-logo" @click="$router.push('/home')">
-        <img src="@/assets/foot-logo.png" alt="">
+        <img src="@/assets/footer-logo.webp" alt="">
       </div>
       <p class="footer-bot-copyright">
         © 2021 I Midnight Sad Rose Limited All Rights Reserved I Be a visionary I Powered by Buykop

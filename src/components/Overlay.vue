@@ -7,7 +7,7 @@
           <p class="title2">We've got a gift for you ! Just Subscribe here !!! Limited to the top 20 everyday.</p>
         </div>
         <div class="main1-img">
-          <img src="@/assets/gift.png" alt="">
+          <img src="@/assets/gift.webp" alt="">
         </div>
         <div class="main1-field">
           <van-form @submit="handleSubscribe">
@@ -37,13 +37,13 @@
               <!-- 1 -->
               <li class="list-item">
                 <div class="list-item-main">
-                  <img src="@/assets/gift1.png" alt="">
+                  <img src="@/assets/gift1.webp" alt="">
                 </div>
                 <div class="list-item-tag">Fishnet Bodystocking</div>
               </li>
               <li class="list-item">
                 <div class="list-item-main">
-                  <img src="@/assets/gift2.png" alt="">
+                  <img src="@/assets/gift2.webp" alt="">
                 </div>
                 <div class="list-item-tag">Portable Fan</div>
               </li>
@@ -350,7 +350,7 @@ img {
               <p class="title2">We've got a gift for you ! Just Subscribe here !!! Limited to the top 20 everyday.</p>
             </div>
             <div class="main1-img">
-              <img src="@/assets/gift.png" alt="">
+              <img src="@/assets/gift.webp" alt="">
             </div>
             <div class="main1-field">
               <van-form @submit="handleSubscribe">
@@ -376,13 +376,13 @@ img {
                 <!-- 1 -->
                 <li class="list-item">
                   <div class="list-item-main">
-                    <img src="@/assets/gift1.png" alt="">
+                    <img src="@/assets/gift1.webp" alt="">
                   </div>
                   <div class="list-item-tag">Fishnet Bodystocking</div>
                 </li>
                 <li class="list-item">
                   <div class="list-item-main">
-                    <img src="@/assets/gift2.png" alt="">
+                    <img src="@/assets/gift2.webp" alt="">
                   </div>
                   <div class="list-item-tag">Portable Fan</div>
                 </li>

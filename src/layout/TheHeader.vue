@@ -4,9 +4,18 @@
 -->
 
 <template>
-  <div class="header" id="header">
-    <div class="logo" @click="$router.push('/home')">
-      <img src="@/assets/header-logo.png" alt="">
+  <div
+    class="header"
+    id="header"
+  >
+    <div
+      class="logo"
+      @click="$router.push('/home')"
+    >
+      <img
+        src="@/assets/header-logo.webp"
+        alt=""
+      >
     </div>
   </div>
 </template>

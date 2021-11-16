@@ -70,6 +70,7 @@
               :height="158"
               :src="item.productImg"
               fit="contain"
+              lazy-load
             >
               <template v-slot:loading>
                 <van-loading

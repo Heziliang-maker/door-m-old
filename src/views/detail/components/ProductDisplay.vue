@@ -64,6 +64,7 @@
           :key="item.url"
         >
           <van-image
+            lazy-load
             class="main-img"
             fit="contain"
             :src="item.url"

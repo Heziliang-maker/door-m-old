@@ -528,11 +528,10 @@ function Translate(myLanguage) {
       .getElementsByClassName("goog-te-menu-frame")[0]
       .contentWindow.document.head.appendChild(cssLink);
 
-    // var script = document.createElement("script");
-    // script.type = "text/javascript";
-    // script.src = "//code.tidio.co/pu3vj2noeexhq2mzg8typxg6rfkvtwmt.js";
-    // script.sync = true;
-    // document.getElementsByTagName("body")[0].appendChild(script);
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "//code.tidio.co/pu3vj2noeexhq2mzg8typxg6rfkvtwmt.js";
+    document.getElementsByTagName("body")[0].appendChild(script);
     // var script2 = document.createElement("script");
     // script2.type = "text/javascript";
     // script2.sync = true;

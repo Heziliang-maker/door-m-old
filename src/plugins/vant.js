@@ -25,6 +25,7 @@ import {
   Form,
   Rate,
 } from "vant";
+
 import { Lazyload } from "vant";
 
 Vue.use(Lazyload);

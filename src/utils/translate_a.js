@@ -1,6 +1,6 @@
 import Vue from "vue";
 
-function Translate(myLanguage) {
+function translate(myLanguage) {
   document.getElementById("google_translate_element").childNodes[0]
     ? document.getElementById("google_translate_element").childNodes[0].remove()
     : "";
@@ -524,6 +524,7 @@ function Translate(myLanguage) {
     cssLink.rel = "stylesheet";
 
     cssLink.type = "text/css";
+
     document
       .getElementsByClassName("goog-te-menu-frame")[0]
       .contentWindow.document.head.appendChild(cssLink);
@@ -541,4 +542,4 @@ function Translate(myLanguage) {
   }, 1000);
 }
 
-Vue.prototype.Translate = Translate;
+Vue.prototype.$translate = translate;

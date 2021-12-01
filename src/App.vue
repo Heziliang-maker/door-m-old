@@ -34,8 +34,22 @@
           alt="discount"
         ></div>
     </transition>
+    <van-skeleton
+      title
+      avatar
+      :row="3"
+      :loading="loading"
+    >
+      <div class="skbox">
+        <div class="skbox-item">1</div>
+        <div class="skbox-item">2</div>
+        <div class="skbox-item">3</div>
+      </div>
+    </van-skeleton>
+    <button @click="handleClickLoading">loading switch</button>
   </div>
 </template>
+
 <script>
 import Header from "@/layout/TheHeader";
 import Footer from "@/layout/TheFooter";
@@ -77,7 +91,8 @@ export default {
             rate: 1.2,
             // 更改前的语言
             originLang: "",
-            overlayKey: 1
+            overlayKey: 1,
+            loading: false
         };
     },
     computed: {
@@ -104,6 +119,9 @@ export default {
         //监听页面关闭
     },
     methods: {
+        handleClickLoading() {
+            this.loading = !this.loading;
+        },
         ready(isReady) {
             this.isReady = isReady;
             // avoid repeat showcard
@@ -137,7 +155,7 @@ export default {
                 //根据语言 setCookie => 对插件进行默认设置
                 cookie.set("googtrans", "/auto/" + res.result.language);
                 //根据货币 汇率 渲染格式化
-                this.Translate(res.result.language);
+                this.$translate(res.result.language);
             }
         },
         handleGetDiscount() {
@@ -213,6 +231,16 @@ export default {
     z-index: 99;
     img {
         width: 102px;
+    }
+}
+.skbox {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    .skbox-item {
+        width: 100px;
+        height: 100px;
+        border: 1px solid green;
     }
 }
 </style>

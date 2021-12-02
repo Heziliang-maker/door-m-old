@@ -1,6 +1,6 @@
 /*
  * @Date: 2021-12-01
- * @Description:
+ * @Description: vuex入口文件
  */
 import Vue from "vue";
 import Vuex from "vuex";

@@ -1,8 +1,8 @@
 /*
  * @Date: 2021-12-01
- * @Description:
+ * @Description: 渠道分析
  */
-
+import { trackViewBehavior } from "@/api/index";
 // console.log("=>", "首次进入页面");
 if (!sessionStorage.getItem("viewTime")) {
   sessionStorage.setItem("viewTime", Date.now());

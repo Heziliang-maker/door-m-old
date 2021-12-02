@@ -5,46 +5,48 @@
 
 import Vue from "vue";
 import VueRouter from "vue-router";
-import App from "../App.vue";
+import Layout from "@/layout";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    component: App,
+    component: Layout,
     redirect: "/home",
-  },
-  {
-    name: "主页",
-    path: "/home",
-    component: () => import("@/views/home/index.vue"),
-  },
-  {
-    name: "详情",
-    path: "/detail",
-    component: () => import("@/views/detail/index.vue"),
-  },
+    children: [
+      {
+        name: "主页",
+        path: "/home",
+        component: () => import("@/views/home/index.vue"),
+      },
+      {
+        name: "详情",
+        path: "/detail",
+        component: () => import("@/views/detail/index.vue"),
+      },
 
-  {
-    name: "更多",
-    path: "/more",
-    component: () => import("@/views/more"),
-  },
-  {
-    name: "隐私政策",
-    path: "/privacy",
-    component: () => import("@/views/privacy"),
-  },
-  {
-    name: "法律条款",
-    path: "/terms",
-    component: () => import("@/views/terms"),
-  },
-  {
-    name: "关于我们",
-    path: "/about",
-    component: () => import("@/views/about"),
+      {
+        name: "更多",
+        path: "/more",
+        component: () => import("@/views/more"),
+      },
+      {
+        name: "隐私政策",
+        path: "/privacy",
+        component: () => import("@/views/privacy"),
+      },
+      {
+        name: "法律条款",
+        path: "/terms",
+        component: () => import("@/views/terms"),
+      },
+      {
+        name: "关于我们",
+        path: "/about",
+        component: () => import("@/views/about"),
+      },
+    ],
   },
 ];
 

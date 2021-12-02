@@ -3,7 +3,11 @@
  */
 
 const Timestamp = new Date().getTime();
+const path = require("path");
 
+function resolve(dir) {
+  return path.join(__dirname, dir);
+}
 const IS_PROD = ["production", "prod"].includes(process.env.NODE_ENV);
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
@@ -39,5 +43,33 @@ module.exports = {
         },
       ]);
     }
+    config.module
+      .rule("svg")
+      .exclude.add(resolve("src/icons"))
+      .end();
+    config.module
+      .rule("icons")
+      .test(/\.svg$/)
+      .include.add(resolve("src/icons"))
+      .end()
+      .use("svg-sprite-loader")
+      .loader("svg-sprite-loader")
+      .options({
+        symbolId: "icon-[name]",
+      })
+      .end();
+    config.module.rule("scss").oneOfs.store.forEach((item) => {
+      item
+        .use("sass-resources-loader")
+        .loader("sass-resources-loader")
+        .options({
+          resources: [
+            resolve("src/styles/variables.scss"),
+            resolve("src/styles/index.scss"),
+            resolve("src/styles/mixins.scss"),
+          ],
+        })
+        .end();
+    });
   },
 };

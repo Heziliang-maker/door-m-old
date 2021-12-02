@@ -1,3 +1,8 @@
+/*
+ * @Date: 2021-12-02
+ * @Description: 谷歌翻译插件
+ */
+
 import Vue from "vue";
 
 function translate(myLanguage) {

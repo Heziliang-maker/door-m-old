@@ -1,8 +1,9 @@
 /*
  * @Date: 2021-11-16
- * @Description:
+ * @Description: window全局函数
  */
 window.dataLayer = window.dataLayer || [];
+
 function gtag() {
   dataLayer.push(arguments);
 }

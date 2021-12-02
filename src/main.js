@@ -1,3 +1,8 @@
+/*
+ * @Date: 2021-12-02
+ * @Description: 项目入口文件
+ */
+
 // Vue
 import Vue from "vue";
 // APP组件
@@ -14,6 +19,8 @@ import "normalize.css";
 import "amfe-flexible";
 // vant注册组件
 import "./plugins/vant.js";
+// icon注册
+import "./icons";
 // 全局window函数
 import "@/utils/tools.js";
 // 谷歌翻译配置
@@ -22,8 +29,10 @@ import "@/utils/translate_a.js";
 import "@/utils/analysis.js";
 // 过滤器
 import "@/filters";
-// 自定义指令
+// 全局注册自定义指令
 import "@/directives";
+// 全局注册组件
+import "@/components/global";
 // copy插件
 import VueClipboard from "vue-clipboard2";
 Vue.use(VueClipboard);

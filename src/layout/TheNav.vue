@@ -4,13 +4,11 @@
 -->
 <template>
   <div class="nav">
-    <div class="logo">
-      <svg-icon icon-class="chanping"></svg-icon>
-    </div>
-    <div class="collection"></div>
-    <div class="user"></div>
-    <div class="menu"></div>
-    <div class="search"></div>
+    <div class="menu">1</div>
+    <div class="user">2</div>
+    <div class="search">3</div>
+    <div class="col">4</div>
+    <div class="logo">5</div>
   </div>
 </template>
 
@@ -21,29 +19,33 @@ export default {};
 <style lang="scss" scoped>
 .nav {
     display: grid;
-    grid-template-columns: 24px [menu] 24px auto 24px 24px;
+    grid-template-columns: 24px 24px auto 24px 24px [user];
     grid-template-rows: 1fr;
     gap: 0px 16px;
     grid-auto-flow: row;
-}
-
-.logo {
-    grid-area: 1 / menu / 2 / 3;
-}
-
-.collection {
-    grid-area: 1 / 3 / 2 / 4;
-}
-
-.user {
-    grid-area: 1 / 4 / 2 / 5;
+    justify-items: center;
+    align-content: center;
+    grid-template-areas: "menu search logo col user";
+    width: 375px;
 }
 
 .menu {
-    grid-area: 1 / 1 / 2 / menu;
+    grid-area: menu;
+}
+
+.user {
+    grid-area: user;
 }
 
 .search {
-    grid-area: 1 / menu / 2 / 3;
+    grid-area: search;
+}
+
+.col {
+    grid-area: col;
+}
+
+.logo {
+    grid-area: logo;
 }
 </style>

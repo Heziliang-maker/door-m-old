@@ -49,7 +49,8 @@ export default {
         font-size: 20px;
         line-height: 150px;
         text-align: center;
-        height: 124.85px;
+        height: 180px;
+        width: 343px;
     }
 }
 </style>

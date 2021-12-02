@@ -1,3 +1,6 @@
+// TODO: mobile 首页重构
+
+
 <template>
   <div id="app">
     <div class="layout-header">
@@ -25,7 +28,7 @@
     </transition>
     <transition name="van-slide-right">
       <div
-        v-show="isProductPage"
+        v-show="isReady && isProductPage"
         ref="btnForDiscount"
         class="discount_btn"
         @click="handleGetDiscount"
@@ -34,19 +37,6 @@
           alt="discount"
         ></div>
     </transition>
-    <van-skeleton
-      title
-      avatar
-      :row="3"
-      :loading="loading"
-    >
-      <div class="skbox">
-        <div class="skbox-item">1</div>
-        <div class="skbox-item">2</div>
-        <div class="skbox-item">3</div>
-      </div>
-    </van-skeleton>
-    <button @click="handleClickLoading">loading switch</button>
   </div>
 </template>
 
@@ -92,7 +82,8 @@ export default {
             // 更改前的语言
             originLang: "",
             overlayKey: 1,
-            loading: false
+            loading: false,
+            timer: null
         };
     },
     computed: {
@@ -100,6 +91,11 @@ export default {
             const { path } = this.$route;
             const routeFilter = ["/home", "/more"];
             return routeFilter.includes(path);
+        }
+    },
+    watch: {
+        $route(newValue, oldValue) {
+            this.isReady = false;
         }
     },
     mounted() {
@@ -116,21 +112,27 @@ export default {
                 this.originLang = cookieLang;
             }
         }, 500);
+
         //监听页面关闭
+    },
+    beforeDestroy() {
+        clearTimeout(this.timer);
     },
     methods: {
         handleClickLoading() {
             this.loading = !this.loading;
         },
-        ready(isReady) {
-            this.isReady = isReady;
+        ready() {
+            this.isReady = true;
+            this.timer = setTimeout(() => {
+                if (localStorage.getItem("isFirstView")) {
+                    this.showCard = false;
+                } else {
+                    localStorage.setItem("isFirstView", 1);
+                    this.showCard = true;
+                }
+            }, 600);
             // avoid repeat showcard
-            if (localStorage.getItem("isFirstView") == 1) {
-                this.showCard = false;
-            } else {
-                localStorage.setItem("isFirstView", 1);
-                this.showCard = true;
-            }
         },
         async handleSelectLang(cookieLang) {
             // 防止初始化第一次报错
@@ -145,12 +147,8 @@ export default {
             }
         },
         async getCounryInfo() {
-            // 获取ip对应的countryCode
-            // let { data } = await axios.get("https://www.buykop.com/ip-api");
-            // 获取countryCode对应的国家的汇率和货币符号 语言
-            // let res = await queryLocalLanguage(data.countryCode);
+            // 获取对应的国家的汇率和货币符号 语言
             let res = await queryLocalLanguage();
-            // console.log("myLocalInfo=>", myLocalInfo);
             if (res.status === "success") {
                 //根据语言 setCookie => 对插件进行默认设置
                 cookie.set("googtrans", "/auto/" + res.result.language);
@@ -231,16 +229,6 @@ export default {
     z-index: 99;
     img {
         width: 102px;
-    }
-}
-.skbox {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    .skbox-item {
-        width: 100px;
-        height: 100px;
-        border: 1px solid green;
     }
 }
 </style>

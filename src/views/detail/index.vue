@@ -32,12 +32,16 @@ export default {
         };
     },
     async created() {
-        const { query } = this.$route;
-        const body = JSON.parse(query.requestQuery);
-        const res = await queryProductsDetail(body);
-        this.data = res.result.data;
+        await this.initData();
+        this.$emit("ready");
     },
     methods: {
+        async initData() {
+            const { query } = this.$route;
+            const body = JSON.parse(query.requestQuery);
+            const res = await queryProductsDetail(body);
+            this.data = res.result.data;
+        },
         handleClickBuy() {
             const { query } = this.$route;
             window.open(query.url, "_blank");

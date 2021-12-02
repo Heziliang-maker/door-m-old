@@ -10,16 +10,14 @@ import store from "@/store";
 Vue.config.productionTip = false;
 // 重置默认样式
 import "normalize.css";
-// 重置默认样式
-import "minireset.css";
 // rem插件
 import "amfe-flexible";
 // vant注册组件
 import "./plugins/vant.js";
-// 谷歌翻译配置
-import "@/utils/translate_a.js";
 // 全局window函数
 import "@/utils/tools.js";
+// 谷歌翻译配置
+import "@/utils/translate_a.js";
 // 分析模块
 import "@/utils/analysis.js";
 // 过滤器

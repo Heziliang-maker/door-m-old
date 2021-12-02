@@ -1,10 +1,8 @@
 <template>
   <div>
-    <div class="home">
-      <!-- 轮播展示 -->
-      <div class="banner">
-        <Swiper :list="bannerList" />
-      </div>
+    <!-- 轮播展示 -->
+    <div class="banner">
+      <Swiper :list="bannerList" />
     </div>
     <!-- slide 展示 -->
     <div class="slide">
@@ -76,11 +74,9 @@ export default {
             TabList: []
         };
     },
-    beforeCreate() {
-        this.$emit("ready", false);
-    },
-    mounted() {
-        this.initData();
+    async mounted() {
+        await this.initData();
+        this.$emit("ready");
     },
     computed: {
         curListForTab() {
@@ -94,27 +90,24 @@ export default {
         updateCurListForTab(productUrl) {
             const target = this.curListForTab.find((item) => item.productUrl === productUrl);
             target.isView = !target.isView;
-            console.log("=target>", target);
+            // console.log("=target>", target);
         },
-        initData() {
-            queryPortalProducts().then((res) => {
-                const data = res.result[0];
-                this.bannerList = data.portalsAdvDTOS;
-                let list1 = data.portalsHotProduct.slice(0, 3);
-                let list2 = data.portalsHotProduct.slice(3);
-                this.hotsaleList = [list1, list2]; //not responsive
-                this.TabList = Object.keys(data.stringListMap);
-                this.curTabName = this.TabList[0]; //默认为第一项
-                this.TabList.forEach((cate) => {
-                    data.stringListMap[cate].forEach((item) => {
-                        item.isView = false;
-                    });
-                });
-                this.cateMap = data.stringListMap;
-                this.$nextTick(() => {
-                    this.$emit("ready", true);
+        async initData() {
+            const res = await queryPortalProducts();
+
+            const data = res.result[0];
+            this.bannerList = data.portalsAdvDTOS;
+            let list1 = data.portalsHotProduct.slice(0, 3);
+            let list2 = data.portalsHotProduct.slice(3);
+            this.hotsaleList = [list1, list2]; //not responsive
+            this.TabList = Object.keys(data.stringListMap);
+            this.curTabName = this.TabList[0]; //默认为第一项
+            this.TabList.forEach((cate) => {
+                data.stringListMap[cate].forEach((item) => {
+                    item.isView = false;
                 });
             });
+            this.cateMap = data.stringListMap;
         },
         handleSeemore() {
             this.$router.push({
@@ -129,10 +122,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.home {
-    width: 100%;
-}
-
 .banner {
     width: 100%;
     margin-bottom: 10px;

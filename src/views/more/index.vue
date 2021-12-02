@@ -3,12 +3,16 @@
  * @Description: 
 -->
 <template>
-  <div class="more" v-cloak>
+  <div class="more">
     <div class="title">
       {{tabName}}
     </div>
     <!-- ----------- -->
-    <Grid :rate='rate' :ccy='ccy' :list="list" />
+    <Grid
+      :rate='rate'
+      :ccy='ccy'
+      :list="list"
+    />
     <!-- ----------- -->
   </div>
 </template>
@@ -32,31 +36,22 @@ export default {
     components: {
         Grid
     },
-    beforeCreate() {
-        this.$emit("ready", false);
-    },
-    created() {
-        this.initData();
+    async created() {
+        await this.initData();
+        this.$emit("ready");
     },
     methods: {
-        initData() {
+        async initData() {
             const { tabName, classifyId } = this.$route.query;
             this.tabName = tabName;
-            queryPortalProducts(classifyId).then((res) => {
-                this.list = res.result[0].stringListMap[tabName];
-                this.$nextTick(() => {
-                    this.$emit("ready", true);
-                });
-            });
+            const res = await queryPortalProducts(classifyId);
+            this.list = res.result[0].stringListMap[tabName];
         }
     }
 };
 </script>
 
 <style lang="scss" scoped>
-[v-cloak] {
-    display: none;
-}
 .more {
     .title {
         font-size: 14px;

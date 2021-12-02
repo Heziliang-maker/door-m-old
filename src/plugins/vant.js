@@ -14,7 +14,6 @@ import {
   Collapse,
   CollapseItem,
   Image as VanImage,
-  Skeleton,
   Loading,
   Popup,
   Icon,
@@ -33,12 +32,13 @@ Toast.setDefaultOptions({ className: "notranslate" });
 import "vant/lib/swipe/style";
 import "vant/lib/swipe-item/style";
 import "vant/lib/tabs/style";
+import "vant/lib/tab/style";
 import "vant/lib/grid/style";
 import "vant/lib/grid-item/style";
+import "vant/lib/image/style";
 import "vant/lib/collapse-item/style";
 import "vant/lib/collapse/style";
 import "vant/lib/loading/style";
-import "vant/lib/skeleton/style";
 import "vant/lib/popup/style";
 import "vant/lib/icon/style";
 import "vant/lib/toast/style";
@@ -56,7 +56,6 @@ Vue.use(GridItem);
 Vue.use(Loading);
 Vue.use(Collapse);
 Vue.use(CollapseItem);
-Vue.use(Skeleton);
 Vue.use(Popup);
 Vue.use(Icon);
 Vue.use(Button);

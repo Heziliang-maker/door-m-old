@@ -22,6 +22,7 @@
 
       body {
         width: 100%;
+        top: 0 !important;
       }
       html,
       body {
@@ -86,11 +87,6 @@
         margin: 0 3px;
       }
 
-      body {
-        top: 0 !important;
-        z-index: 1;
-      }
-
       .goog-te-banner-frame {
         display: none;
       }
@@ -125,7 +121,7 @@
     <div id="app"></div>
     <div
       id="google_translate_element"
-      style="position:fixed;right:70px;z-index:2000;opacity:1"
+      style="position:absolute;right:50%;transform:translateX(-50%);z-index:2000;opacity:1"
     ></div>
     <!-- built files will be auto injected -->
     <!-- <script>

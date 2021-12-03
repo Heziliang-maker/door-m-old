@@ -3,36 +3,40 @@
  * @Description: 
 -->
 <template>
-  <div>
-    <van-grid
-      :center="false"
-      :border="false"
-      :column-num="2"
-    >
-      <!--   productId:item.productId,shopId:item.shopId -->
-      <van-grid-item
-        v-for="(item,index) in list"
-        :key="item.productUrl"
-        :ref="'gridItem'+index"
-        v-jumpTo="{url:item.productUrl,type:2,id:item.id,shopId:item.shopId,
+  <div class="grid">
+    <div class="grid-header">
+      <slot name="header"></slot>
+    </div>
+    <div class="grid-main">
+      <van-grid
+        :center="false"
+        :border="false"
+        :column-num="2"
+      >
+        <!--   productId:item.productId,shopId:item.shopId -->
+        <van-grid-item
+          v-for="(item,index) in list"
+          :key="item.productUrl"
+          :ref="'gridItem'+index"
+          v-jumpTo="{url:item.productUrl,type:2,id:item.id,shopId:item.shopId,
         detailQuery:{
           productId:item.productId,
           shopId:item.shopId
         }
         }"
-      >
-        <div class="grid-list-item">
-          <div class="item-pic">
-            <!-- 视频播放按钮 -->
-            <!-- <iframe  src="@/assets/bofang.svg" width="30" height="30" frameborder="0"></iframe> -->
-            <img
-              v-show="!!item.video && !item.isView"
-              class="item-pic-play"
-              src="@/assets/bofang.png"
-              alt="播放该视频"
-              @click.stop="handleClickVideoPlayIcon(index,item.productUrl)"
-            >
-            <!-- <van-icon
+        >
+          <div class="grid-list-item">
+            <div class="item-pic">
+              <!-- 视频播放按钮 -->
+              <!-- <iframe  src="@/assets/bofang.svg" width="30" height="30" frameborder="0"></iframe> -->
+              <img
+                v-show="!!item.video && !item.isView"
+                class="item-pic-play"
+                src="@/assets/bofang.png"
+                alt="播放该视频"
+                @click.stop="handleClickVideoPlayIcon(index,item.productUrl)"
+              >
+              <!-- <van-icon
               v-show="!!item.video && !isView"
               class="item-pic-play"
               name="play-circle-o"
@@ -40,86 +44,90 @@
               color="#f6f6f5"
               @click.stop.native="handleClickVideoPlayIcon(index)"
             /> -->
-            <transition name="van-fade">
-              <div
-                class="item-pic-player"
-                v-show="!!item.video && item.isView"
+              <transition name="van-fade">
+                <div
+                  class="item-pic-player"
+                  v-show="!!item.video && item.isView"
+                >
+                  <!-- 视频 -->
+                  <video
+                    :ref="'video'+index"
+                    :src="item.video"
+                    :poster="item.videoCover"
+                    muted
+                    playsinline
+                    webkit-playsinline
+                    preload="auto"
+                  />
+                  <!-- 视频关闭icon -->
+                  <van-icon
+                    class="item-pic-player__close"
+                    size="14"
+                    name="cross"
+                    @click.stop.native="item.isView = false"
+                  />
+                </div>
+              </transition>
+              <van-image
+                class="van-img"
+                :width="158"
+                :height="158"
+                :src="item.productImg"
+                fit="contain"
+                lazy-load
               >
-                <!-- 视频 -->
-                <video
-                  :ref="'video'+index"
-                  :src="item.video"
-                  :poster="item.videoCover"
-                  muted
-                  playsinline
-                  webkit-playsinline
-                  preload="auto"
-                />
-                <!-- 视频关闭icon -->
-                <van-icon
-                  class="item-pic-player__close"
-                  size="14"
-                  name="cross"
-                  @click.stop.native="item.isView = false"
-                />
-              </div>
-            </transition>
-            <van-image
-              class="van-img"
-              :width="158"
-              :height="158"
-              :src="item.productImg"
-              fit="contain"
-              lazy-load
-            >
-              <template v-slot:loading>
-                <van-loading
-                  type="spinner"
-                  size="20"
-                />
-              </template>
-            </van-image>
-            <!-- <img :src="item.productImg" alt=""> -->
-          </div>
-          <div
-            class="item-desc"
-            v-html="item.productName"
-          >
-          </div>
-          <Score
-            class="item-star"
-            v-if="!!item.starLevel"
-            v-model="item.starLevel"
-            :size="14"
-            readonly
-          />
-          <div
-            v-else
-            class="item-gap"
-          ></div>
-          <div class="item-price notranslate">
-            <div class="current">
-              <span
-                class="current-price"
-                v-html="$options.filters.priceGroup(item.retailPrice)"
-              ></span>
-              <span
-                class="local-price"
-                v-if="rate&&rate!=1&&ccy!=='$'"
-              >≈{{ccy}}
-                {{(item.retailPrice*rate).toFixed(2)}}</span>
+                <template v-slot:loading>
+                  <van-loading
+                    type="spinner"
+                    size="20"
+                  />
+                </template>
+              </van-image>
+              <!-- <img :src="item.productImg" alt=""> -->
             </div>
-            <!-- <span>
+            <div
+              class="item-desc"
+              v-html="item.productName"
+            >
+            </div>
+            <Score
+              class="item-star"
+              v-if="!!item.starLevel"
+              v-model="item.starLevel"
+              :size="14"
+              readonly
+            />
+            <div
+              v-else
+              class="item-gap"
+            ></div>
+            <div class="item-price notranslate">
+              <div class="current">
+                <span
+                  class="current-price"
+                  v-html="$options.filters.priceGroup(item.retailPrice)"
+                ></span>
+                <span
+                  class="local-price"
+                  v-if="rate&&rate!=1&&ccy!=='$'"
+                >≈{{ccy}}
+                  {{(item.retailPrice*rate).toFixed(2)}}</span>
+              </div>
+              <!-- <span>
               ${{item.retailPrice.toString().split('.')[0]}}<a>{{item.retailPrice.toString().split('.').length>1?item.retailPrice.toString().split('.')[1]:''}}</a>
             </span> -->
-            <span
-              class="origin"
-              v-html="$options.filters.countFix(item.reamt)"
-            ></span>
+              <span
+                class="origin"
+                v-html="$options.filters.countFix(item.reamt)"
+              ></span>
+            </div>
           </div>
-        </div>
-      </van-grid-item>
-    </van-grid>
+        </van-grid-item>
+      </van-grid>
+    </div>
+    <div class="grid-footer">
+      <slot name="footer"></slot>
+    </div>
   </div>
 </template>
 
@@ -159,12 +167,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-ul,
-li,
-div,
-p,
-img {
-    // outline: 1px solid #00cec9;
+.grid {
+    padding: $container-padding;
+}
+.grid-header {
+    @include font-b(20px);
+    margin-bottom: $container-padding;
+}
+.grid-footer {
 }
 .van-grid {
     width: calc(100vw - 18px);
@@ -173,6 +183,8 @@ img {
         width: 50%;
         flex-grow: 0;
         overflow: hidden;
+        border-radius: 4px;
+        background-color: $container-bg3;
         .item-pic {
             overflow: hidden;
             margin-bottom: 5px;

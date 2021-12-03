@@ -2,3 +2,45 @@
  * @Date: 2021-12-02
  * @Description: scss函数
  */
+@mixin DEBUG {
+  ul,
+  li,
+  section,
+  div,
+  button,
+  p,
+  header,
+  main,
+  footer {
+    outline: 1px solid #00cec9;
+  }
+  a,
+  span {
+    outline: 1px dashed #ff0080;
+  }
+  i {
+    outline: 1px solid #ff6666;
+  }
+  img {
+    outline: 1px solid #ffdb4d;
+  }
+}
+
+@mixin sc($fontsize, $color) {
+  font-size: $fontsize;
+  color: $color;
+}
+
+@mixin font-n($size: 13px, $color: #666666) {
+  font-size: $size;
+  font-family: SourceHanSansSC-Normal, SourceHanSansSC;
+  font-weight: 400;
+  color: $color;
+}
+
+@mixin font-b($size: 16px, $color: #111111) {
+  font-size: $size;
+  font-family: SourceHanSansSC-Bold, SourceHanSansSC;
+  font-weight: bold;
+  color: $color;
+}

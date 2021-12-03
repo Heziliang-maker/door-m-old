@@ -16,7 +16,7 @@ Vue.config.productionTip = false;
 // 重置默认样式
 import "normalize.css";
 // rem插件
-import "amfe-flexible";
+import "amfe-flexible/index";
 // vant注册组件
 import "./plugins/vant.js";
 // icon注册

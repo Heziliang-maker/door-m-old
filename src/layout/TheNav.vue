@@ -4,11 +4,36 @@
 -->
 <template>
   <div class="nav">
-    <div class="menu">1</div>
-    <div class="user">2</div>
-    <div class="search">3</div>
-    <div class="col">4</div>
-    <div class="logo">5</div>
+    <div class="menu">
+      <svg-icon
+        class="svgicon"
+        icon-class="menu"
+      ></svg-icon>
+    </div>
+    <div class="search">
+      <svg-icon
+        class="svgicon"
+        icon-class="search"
+      ></svg-icon>
+    </div>
+    <div class="logo">
+      <img
+        src="@/assets/header-logo.webp"
+        alt="buykop-logo"
+      >
+    </div>
+    <div class="col">
+      <svg-icon
+        class="svgicon"
+        icon-class="collection"
+      ></svg-icon>
+    </div>
+    <div class="user">
+      <svg-icon
+        class="svgicon"
+        icon-class="user"
+      ></svg-icon>
+    </div>
   </div>
 </template>
 
@@ -24,9 +49,21 @@ export default {};
     gap: 0px 16px;
     grid-auto-flow: row;
     justify-items: center;
-    align-content: center;
+    align-items: center;
     grid-template-areas: "menu search logo col user";
     width: 375px;
+    padding: 8px 16px;
+    box-sizing: border-box;
+    background-color: #fff;
+
+    .svgicon {
+        width: 24px;
+        height: 24px;
+    }
+
+    > div {
+        font-size: 0;
+    }
 }
 
 .menu {
@@ -47,5 +84,12 @@ export default {};
 
 .logo {
     grid-area: logo;
+
+    img {
+        height: 26px;
+    }
+}
+.box {
+    line-height: 24px;
 }
 </style>

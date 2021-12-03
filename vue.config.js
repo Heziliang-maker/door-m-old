@@ -9,6 +9,7 @@ function resolve(dir) {
   return path.join(__dirname, dir);
 }
 const IS_PROD = ["production", "prod"].includes(process.env.NODE_ENV);
+
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
 module.exports = {

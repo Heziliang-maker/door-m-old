@@ -3,12 +3,14 @@
  * @Description: 
 -->
 // TODO: mobile 首页重构
-
+// TODO: vant样式自定义
 
 <template>
-  <div>
+  <div id="page">
     <div class="layout-header">
-      <Nav />
+      <van-sticky>
+        <Nav />
+      </van-sticky>
     </div>
     <div class="layout-main ">
       <router-view
@@ -24,13 +26,13 @@
     >
       <Footer />
     </div>
-    <transition name="van-fade">
+    <!-- <transition name="van-fade">
       <Overlay
         :key="overlayKey"
         :show.sync="showCard"
       />
-    </transition>
-    <transition name="van-slide-right">
+    </transition> -->
+    <!-- <transition name="van-slide-right">
       <div
         v-show="isReady && isProductPage"
         ref="btnForDiscount"
@@ -40,7 +42,7 @@
           src="@/assets/dialog_btn.png"
           alt="discount"
         ></div>
-    </transition>
+    </transition> -->
   </div>
 </template>
 
@@ -181,58 +183,60 @@ export default {
 };
 </script>
 
-<style lang="scss">
-#app {
+<style lang="scss" scoped>
+#page ::v-deep {
+    padding-top: $trans-height;
+    @include DEBUG;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: #ffffff;
-}
-.layout-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 9;
-    background: #fff;
-}
-.layout-main {
-    margin-top: 44px;
-}
-.layout-footer {
-    //
-}
+    background: $container-bg1;
+    .van-tabs {
+        font-size: 10px;
+        font-family: PingFangSC-Medium, PingFang SC;
+        font-weight: 500;
+        color: #000000;
 
-.van-tabs {
-    font-size: 10px;
-    font-family: PingFangSC-Medium, PingFang SC;
-    font-weight: 500;
-    color: #000000;
+        border-top: 1px solid #d8d8d8;
+        border-bottom: 1px solid #d8d8d8;
 
-    border-top: 1px solid #d8d8d8;
-    border-bottom: 1px solid #d8d8d8;
-
-    .van-tab {
-        flex: 0 0 110px !important;
-        word-break: keep-all;
-        padding: 0 !important;
-        text-align: center;
+        .van-tab {
+            flex: 0 0 110px !important;
+            word-break: keep-all;
+            padding: 0 !important;
+            text-align: center;
+        }
     }
-}
-// 遮罩层
-.van-overlay {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.discount_btn {
-    position: fixed;
-    right: 15px;
-    bottom: 50px;
-    transition: opacity 0.4s linear;
-    transition-delay: 0.3s;
-    z-index: 99;
-    img {
-        width: 102px;
+    // 遮罩层
+    .van-overlay {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .discount_btn {
+        position: fixed;
+        right: 15px;
+        bottom: 50px;
+        transition: opacity 0.4s linear;
+        transition-delay: 0.3s;
+        z-index: 99;
+        img {
+            width: 102px;
+        }
+    }
+    .layout-header {
+        // margin-top: $trans-height;
+        // position: fixed;
+        // top: $trans-height;
+        // top: 47px;
+        // left: 0;
+        // right: 0;
+        // z-index: 9;
+        // background: #fff;
+    }
+    .layout-main {
+    }
+    .layout-footer {
+        //
     }
 }
 </style>

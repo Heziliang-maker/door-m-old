@@ -5,17 +5,16 @@
       <Swiper :list="bannerList" />
     </div>
     <!-- slide 展示 -->
-    <div class="slide">
+    <!-- <div class="slide">
       <div class="slide-title">
         Hot Sale New Style
       </div>
       <Slider :list='hotsaleList[0]' />
       <Slider :list='hotsaleList[1]' />
-    </div>
+    </div> -->
     <!-- tab + lsit 展示 -->
     <div class="grid">
-      <!-- tabs -->
-      <van-tabs
+      <!-- <van-tabs
         v-model="curTabName"
         color="#000000"
         line-height='1px'
@@ -28,21 +27,16 @@
           :title="tab"
           :name="tab"
         ></van-tab>
-      </van-tabs>
-      <!-- ----------- -->
-      <Grid
+      </van-tabs> -->
+      <grid
         :rate='rate'
         :ccy='ccy'
         :list="curListForTab"
         @update="updateCurListForTab"
-      />
-      <!-- ----------- -->
-    </div>
-    <div
-      class="seemore"
-      @click="handleSeemore"
-    >
-      <div>more ></div>
+      >
+        <template #header>New This Week</template>
+        <template #footer>See More</template>
+      </grid>
     </div>
   </div>
 </template>
@@ -125,6 +119,9 @@ export default {
 .banner {
     width: 100%;
     margin-bottom: 10px;
+    padding: $container-padding;
+    box-sizing: border-box;
+    background: $container-bg2;
 }
 .banner-sk {
     width: 100%;

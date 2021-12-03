@@ -29,6 +29,7 @@ import { Lazyload } from "vant";
 
 Vue.use(Lazyload);
 Toast.setDefaultOptions({ className: "notranslate" });
+
 import "vant/lib/swipe/style";
 import "vant/lib/swipe-item/style";
 import "vant/lib/tabs/style";
@@ -45,6 +46,7 @@ import "vant/lib/toast/style";
 import "vant/lib/field/style";
 import "vant/lib/button/style";
 import "vant/lib/rate/style";
+import "vant/lib/sticky/style";
 
 Vue.use(VanImage);
 Vue.use(Swipe);

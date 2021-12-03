@@ -61,6 +61,8 @@ export function queryPortalProducts(sort = null) {
     },
   });
 }
+
+
 export function queryProductsDetail({ productId, shopId }) {
   return requestShop({
     url: "/products/query/details",
